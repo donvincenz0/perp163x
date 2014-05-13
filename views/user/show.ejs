@@ -1,0 +1,14 @@
+<div class='container'>
+	<h1><%= user.lastname %> </h1>
+	<h3><%= user.firstname %> </h3>
+	<% if(user.admin) { %>
+		<img src="/images/admin.png"> <%= __('Administrator') %>
+	<% } else { %>
+		<img src="/images/pawn.png"> <%= __('User') %>
+	<% } %>
+	<hr>
+	<h3>contact: <%= user.email %> </h3>
+
+	<a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id %>">Edit</a>
+
+</div>
