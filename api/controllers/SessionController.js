@@ -30,7 +30,7 @@ module.exports = {
 		if(!req.param('email') || !req.param('password')) {
 			// return next:((err: ["Le mot de passe ne correspond pas au mot de passe de confirmation."])});
 
-			var usernamePasswordRequiredError = [{name: 'usernamePasswordRequired', message: 'Veuillez entrer une adresse email et un mot de passe.'}];
+			var usernamePasswordRequiredError = [{name: 'usernamePasswordRequired', message: res.i18n('Please enter a valid email address and password.')}];
 
 			// Remember that err is the object being passwrd down (a.k.a. flash.err), whose value is another 
 			// object with the key of usernamePasswordRequiredError
@@ -48,7 +48,7 @@ module.exports = {
 
 			// if no user is found...
 			if(!user) {
-				var noAccountError = [{name: 'noAccount', message: 'L\'adresse email' + req.param('email') + ' n\'existe pas.' }];
+				var noAccountError = [{name: 'noAccount', message: res.i18n('The email address') + req.param('email') + ' ' + res.i18n('does not exist.') }];
 				req.session.flash = {
 					err: noAccountError
 				}
@@ -86,7 +86,7 @@ module.exports = {
 						id: user.id,
 						firstname: user.firstname,
 						lastname: user.lastname,
-						action: ' has logged in.'
+						action: ' ' + res.i18n('has logged in.')
 					});
 
 					// if the user is also an admin redirect to the user list
@@ -121,7 +121,7 @@ module.exports = {
 						id: userId,
 						firstname: user.firstname,
 						lastname: user.lastname,
-						action: ' has logged out.'
+						action: ' ' + res.i18n('has logged out.')
 					});
 				});
 			}

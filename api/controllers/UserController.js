@@ -49,27 +49,52 @@ module.exports = {
           if(err) return next(err);
 
           // add the action attribute to the user object for the flash message.
-          user.action = " signed-up and logged in.";
+          user.action = ' ' + res.i18n('signed-up and logged in.');
 
           // Let other subscribed sockets know that the user was created
           User.publishCreate(user);
 
           // After successfully creating the user
      			// redirect to the show action
-     			//res.json(user);
-          res.redirect('/user/show/' + user.id);
+          res.redirect('/user/editProfile/' + user.id);
    		   });
       });
    },
 
+  editProfile: function(req, res, next) {
+      // Find the user from the id passed in via params
+      User.findOne(req.param('id'), function foundUser (err, user) {
+        if (err) return next(err);
+        if (!user) return next(res.i18n('The user does not exist.'));
+        res.view({
+          user: user
+        });
+      });
+  }
+
+   // updateProfile: function (req, res, next) {
+   //    // Update the user with the params sent from the profile update form
+   //    User.update( req.param('id'), req.params.all, function profileUpdated(err, user) {
+
+   //    });
+
+   //    User.findOne(req.param('id'), function foundUser(err, user) {
+   //      if (err) return next(err);
+   //      if(!user) return next();
+   //      res.view({
+   //        user: user
+   //      });
+   //    });
+   // }
+
    show: function (req, res, next) {
-    		User.findOne(req.param('id'), function foundUser(err, user) {
-    			if (err) return next(err);
-    			if(!user) return next();
-    			res.view({
-    				user: user
-    			});
-      	});
+  		User.findOne(req.param('id'), function foundUser(err, user) {
+  			if (err) return next(err);
+  			if(!user) return next();
+  			res.view({
+  				user: user
+  			});
+    	});
    },
 
    index: function (req, res, next) {
@@ -86,11 +111,10 @@ module.exports = {
 
    // render the edit view
    edit: function (req, res, next) {
-
    		// Find the user from the id passed in via params
    		User.findOne(req.param('id'), function foundUser (err, user) {
    			if (err) return next(err);
-   			if (!user) return next('L\'utilisateur n\'éxiste pas.');
+   			if (!user) return next(res.i18n('The user does not exist.'));
    			res.view({
    				user: user
    			});
@@ -111,7 +135,7 @@ module.exports = {
    destroy: function (req, res, next) {
    		User.findOne(req.param('id'), function foundUser( err, user){
    			if (err) return next(err);
-   			if(!user) return next('L\'utilisateur n\'existe pas.');
+   			if(!user) return next(res.i18n('The user does not exist.'));
 
    			User.destroy(req.param('id'), function userDestroyed(err){
    				if(err) return next(err);

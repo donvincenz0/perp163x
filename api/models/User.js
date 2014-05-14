@@ -22,6 +22,10 @@ module.exports = {
 		required: true
 	},
 
+	maidenName: {
+		type: 'string'
+	}
+
 	email: {
 		type: 'string',
 		email: true,
@@ -41,8 +45,107 @@ module.exports = {
 	admin: {
 		type: 'boolean',
 		defaultsTo: false
-	}
+	},
     
+	birthDate: {
+		type: 'DATE'		
+	},
+
+	birthCity: {
+		type: 'string'
+	},
+
+	birthDepartment: {
+		type: 'string'
+	},
+
+	addressStreetNumber: {
+		type: 'string'
+	},
+
+	addressStreet: {
+		type: 'string'
+	},
+
+	postalCode: {
+		type: 'string'
+	},
+
+	city: {
+		type: 'string'
+	},
+
+	country: {
+		type: 'string'
+	},
+
+	phoneNumberHome: {
+		type: 'string'
+	},
+
+	phoneNumberMobile: {
+		type: 'string'
+	},
+
+	idCardType: {
+		type: 'string'
+	},
+
+	idCardExpirationDate: {
+		type: 'DATE'
+	},
+
+	idCardNumber: {
+		type: 'string'
+	},
+
+	idCardDeliveryCity: {
+		type: 'string'
+	},
+
+	idCardDeliveryCountry: {
+		type: 'string'
+	},
+
+	idCardDeliveryAuthority: {
+		type: 'string'
+	},
+
+	nationality: {
+		type: 'string'
+	},
+
+	maritalStatus: {
+		type: 'string'
+	},
+
+	matrimonialRegime: {
+		type: 'string'
+	},
+
+	jobTitle: {
+		type: 'string'
+	},
+
+	socialRegime: {
+		type: 'string'
+	},
+
+	// In french: Secteur d'activité
+	jobTypeOfIndustry: {
+		type: 'string'
+	},
+
+	expectedRetirementAge: {
+		type: 'integer',
+		defaultTo: 67
+	},
+
+	// In french: revenus brut annuel du foyer
+	familyYearlyGrossIncomeRange: {
+		type: 'string'
+	}
+
 	//toJSON: function() {
 	//	var obj = this.toObject();
 	//	delete obj.password;
