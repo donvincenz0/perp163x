@@ -23,8 +23,8 @@ module.exports.policies = {
   	subscribe	: ["flash", "isAuthenticated"], // Careful, this is called several times per page request. For example, do not put "localize" here.
   	create		: ["localize", "flash"],
   	show		: ["localize", "userCanSeeProfile"],
-  	edit		: ["localize", "userCanSeeProfile"],
-  	update		: ["localize", "userCanSeeProfile"],
+  	edit		: ["localize", "flash", "userCanSeeProfile"],
+  	update		: ["localize", "flash", "userCanSeeProfile"],
   	'*'			: ["localize", "admin"]
   },
 

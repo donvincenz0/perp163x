@@ -12,20 +12,22 @@ module.exports = {
 
   	schema: true,
 
+  	title: {
+  		type: 'string'
+  	},
+
 	lastname: {
-		type: 'string',
-		required: true
+		type: 'string'
 	},
 
 	firstname: {
-		type: 'string',
-		required: true
+		type: 'string'
 	},
 
 	maidenName: {
 		type: 'string'
-	}
-
+	},
+	
 	email: {
 		type: 'string',
 		email: true,
@@ -46,12 +48,17 @@ module.exports = {
 		type: 'boolean',
 		defaultsTo: false
 	},
+
+	role: {
+		type: 'string',
+		defaultTo: 'client'
+	},
     
 	birthDate: {
 		type: 'DATE'		
 	},
 
-	birthCity: {
+	birthPlace: {
 		type: 'string'
 	},
 
@@ -99,15 +106,19 @@ module.exports = {
 		type: 'string'
 	},
 
-	idCardDeliveryCity: {
+	idCardIssuanceCity: {
 		type: 'string'
 	},
 
-	idCardDeliveryCountry: {
+	idCardIssuanceCountry: {
 		type: 'string'
 	},
 
-	idCardDeliveryAuthority: {
+	idCardIssuanceDate: {
+		type: 'DATE'
+	},
+
+	idCardIssuanceAuthority: {
 		type: 'string'
 	},
 
@@ -123,7 +134,7 @@ module.exports = {
 		type: 'string'
 	},
 
-	jobTitle: {
+	occupation: {
 		type: 'string'
 	},
 
@@ -137,27 +148,35 @@ module.exports = {
 	},
 
 	expectedRetirementAge: {
-		type: 'integer',
-		defaultTo: 67
+		type: 'integer'
 	},
 
 	// In french: revenus brut annuel du foyer
 	familyYearlyGrossIncomeRange: {
 		type: 'string'
-	}
+	},
 
-	//toJSON: function() {
-	//	var obj = this.toObject();
-	//	delete obj.password;
-	//	delete obj.confirmation;
-	//	delete obj._csrf;
-	//	return obj;
-	//}
+	familyAssetsRange: {
+		type: 'string'
+	},
+
+	defaultLanguage:{
+		type: 'string',
+		defaultsTo: 'en'
+	},
+
+	toJSON: function() {
+		var obj = this.toObject();
+		delete obj.password;
+		delete obj.confirmation;
+		delete obj._csrf;
+		return obj;
+	}
 
   },
 
   beforeValidation: function (values, next) {
-  	console.log(values)
+  	//console.log(values)
   	if (typeof values.admin !== 'undefined') {
   		if (values.admin === 'unchecked') {
   			values.admin = false;

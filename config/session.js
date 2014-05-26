@@ -17,20 +17,22 @@ module.exports.session = {
   // forcing them to log in again. 
   secret: 'b497fa5ac70167c3fdc1c7ae193f8849',
 
+  // Use in Memory
+  //adapter: 'memory'
 
   // In production, uncomment the following lines to set up a shared redis session store
   // that can be shared across multiple Sails.js servers
-  adapter: 'redis',
+  //adapter: 'redis',
   //
   // The following values are optional, if no options are set a redis instance running
   // on localhost is expected.
   // Read more about options at: https://github.com/visionmedia/connect-redis
   //
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
+  //host: process.env.REDIS_HOST,
+  //port: process.env.REDIS_PORT,
   // ttl: <redis session TTL in seconds>,
-  db: process.env.REDIS_DB,
-  pass: process.env.REDIS_PASS
+  //db: process.env.REDIS_DB,
+  //pass: process.env.REDIS_PASS
   // prefix: 'sess:'
 
 

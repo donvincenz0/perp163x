@@ -40,7 +40,8 @@ body {
 	}
 }
 
-.form-signin{
+.form-signin,
+.form-user-edit {
 	max-width: 30%;
 	padding: 19px 29px 29px;
 	margin: 0 auto 20px;
@@ -57,10 +58,59 @@ body {
 	}
 }
 
+/*
 .form-signin input[type=text],
 .form-signin input[type=password] {
 	font-size: 16px;
 	height: auto;
 	margin-bottom: 15px;
 	padding: 7px 9px;
+}*/
+
+.form-signin input[type=text],
+.form-signin input[type=password],
+.form-user-edit input[type=text] {
+	margin-bottom: 0px;
+	padding: 0px 9px;
+}
+
+/* Used for User profile page (/user/show) */
+.show-user-labels {
+	text-align: right;
+	padding: 0px 9px;
+}
+
+.show-user-values {
+	text-align: left;
+	padding: 0px 9px;
+}
+
+.show-user-sections {
+	text-align: left;
+	padding: 10px 0px;
+	padding-top: 0px;
+}
+
+// Mixin
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Usage
+.container {
+  .clearfix();
+  .center-block();
 }

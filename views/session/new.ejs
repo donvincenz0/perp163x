@@ -1,16 +1,34 @@
-<form action="/session/create" method="POST" class="form-signin">
-	<h2 class="form-signin-heading">Se connecter</h2>
+<form action="/session/create" method="POST" class="form-horizontal form-signin">
+	<div class="form-group">
+		<div class="col-md-12">
+			<h2 class="form-signin-heading"><%= __('Sign in') %></h2>
+		</div>
+	</div>
 
-	<% if (flash && flash.err) { %>
-	<ul class="alert alert-success">
-		<% Object.keys(flash.err).forEach(function(error) { %>
-		<li><%- JSON.stringify(flash.err[error]) %></li>
-		<% }) %>
-	</ul>
-	<% } %>
+		<% if (flash && flash.err) { %>
+		<ul class="alert alert-success">
+			<% Object.keys(flash.err).forEach(function(error) { %>
+			<li><%- JSON.stringify(flash.err[error]) %></li>
+			<% }) %>
+		</ul>
+		<% } %>
 
-	<input type="text" class="form-control" placeholder="Adresse email" name="email">
-	<input type="password" class="form-control" placeholder="Mot de Passe" name="password">
-	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Connexion"/>
-	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	<div class="form-group">
+		<label for="email" class="col-md-0 control-label sr-only"><%= __('Email') %></label>
+		<div class="col-md-12">
+			<input type="text" class="form-control" placeholder="Adresse email" name="email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-md-0 control-label sr-only"><%= __("Password") %></label>
+		<div class="col-md-12">
+			<input type="password" class="form-control" placeholder="Mot de Passe" name="password">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<input type="submit" class="btn btn-lg btn-success btn-block" value="<%= __('Sign in') %>"/>
+			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+		</div>
+	</div>
 </form>

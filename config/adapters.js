@@ -37,11 +37,11 @@ module.exports.adapters = {
   //   database: 'YOUR_MYSQL_DB'
   //}
 
-  'default': 'mongo',
+  // 'default': 'mongo',
 
-  mongo: {
-    module  : 'sails-mongo',
-    url: process.env.DB_URL,
-    schema: true
-  }
+  // mongo: {
+  //   module  : 'sails-mongo',
+  //   url: process.env.DB_URL,
+  //   schema: true
+  // }
 };

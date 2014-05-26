@@ -28,8 +28,6 @@ module.exports = {
    		User.create( req.params.all(), function userCreated (err, user) {
 
    			// // If there's an error
-   			// if (err) return next (err);
-
    			if (err) {
    				console.log(err);
    				req.session.flash = {
@@ -56,36 +54,10 @@ module.exports = {
 
           // After successfully creating the user
      			// redirect to the show action
-          res.redirect('/user/editProfile/' + user.id);
+          res.redirect('/user/edit/' + user.id);
    		   });
       });
    },
-
-  editProfile: function(req, res, next) {
-      // Find the user from the id passed in via params
-      User.findOne(req.param('id'), function foundUser (err, user) {
-        if (err) return next(err);
-        if (!user) return next(res.i18n('The user does not exist.'));
-        res.view({
-          user: user
-        });
-      });
-  }
-
-   // updateProfile: function (req, res, next) {
-   //    // Update the user with the params sent from the profile update form
-   //    User.update( req.param('id'), req.params.all, function profileUpdated(err, user) {
-
-   //    });
-
-   //    User.findOne(req.param('id'), function foundUser(err, user) {
-   //      if (err) return next(err);
-   //      if(!user) return next();
-   //      res.view({
-   //        user: user
-   //      });
-   //    });
-   // }
 
    show: function (req, res, next) {
   		User.findOne(req.param('id'), function foundUser(err, user) {
@@ -110,34 +82,73 @@ module.exports = {
    },
 
    // render the edit view
-   edit: function (req, res, next) {
-   		// Find the user from the id passed in via params
-   		User.findOne(req.param('id'), function foundUser (err, user) {
-   			if (err) return next(err);
-   			if (!user) return next(res.i18n('The user does not exist.'));
-   			res.view({
-   				user: user
-   			});
-   		});
-   },
+  edit: function(req, res, next) {
+      // Find the user from the id passed in via params
+      User.findOne(req.param('id'), function foundUser (err, user) {
+        if (err) return next(err);
+        if (!user) return next(res.i18n('The user does not exist.'));
+
+        // If edit form section not defined, defaults to "basic info" section
+        if (req.session.editUserSection  === '' || typeof req.session.editUserSection  === 'undefined') {
+          req.session.editUserSection = 'basic';
+        }
+
+        // If specified, set the edit form section to show
+        if(req.param('editUserSection')) {
+          req.session.editUserSection = req.param('editUserSection');
+        }
+
+        // If specified, set the editOnlyThisSection to true
+        if(req.param('editUserSection')) {
+          req.session.editUserSection = req.param('editUserSection');
+          req.session.editUserOnlyThisSection = req.param('editUserOnlyThisSection');
+        }
+
+
+        res.view({
+          user: user,
+        });
+      });
+  },
 
    // process the info from the edit view
    update: function(req, res, next) {
    		User.update(req.param('id'), req.params.all(), function userUpdated(err){
    			if (err){
+          console.log(err);
+          
+          req.session.flash = {
+            err: err
+          }
    				return res.redirect('/user/edit/' + req.param('id'));
    			}
 
-   			res.redirect('/user/show/' + req.param('id'));
+        // Redirect to the proper page depending on where we stand in the edition of the user
+        // This is the last sections to edit OR we only want to edit one section
+        if (req.param('editUserSection') === 'end' || req.session.editUserOnlyThisSection) {
+          
+          // Reset session variables
+          req.session.editUserSection = null;
+          req.session.editUserOnlyThisSection = null;
+
+          // Redirect to the profile page
+          res.redirect('/user/show/' + req.param('id'));       
+        }
+
+        // Proceed to next section to edit
+        else {
+          req.session.editUserSection = req.param('editUserSection');       
+          res.redirect('/user/edit/' + req.param('id'));
+        }		
    		});
    },
 
    destroy: function (req, res, next) {
-   		User.findOne(req.param('id'), function foundUser( err, user){
+   		User.findOne(req.param('id'), function foundUser( err, user) {
    			if (err) return next(err);
-   			if(!user) return next(res.i18n('The user does not exist.'));
+   			if (!user) return next(res.i18n('The user does not exist.'));
 
-   			User.destroy(req.param('id'), function userDestroyed(err){
+   			User.destroy(req.param('id'), function userDestroyed(err) {
    				if(err) return next(err);
 
           // Inform other sockets
@@ -155,7 +166,7 @@ module.exports = {
    		res.redirect('/user');
    },
 
-   subscribe: function (req, res) {
+  subscribe: function (req, res) {
 
       User.find(function foundUsers(err, users) {
         if(err) return next(err);
@@ -170,7 +181,21 @@ module.exports = {
         // html over the socket
         res.send(200);
       });
-   },
+  },
+
+  // updateDefaultLanguage: function (req, res) {
+  //     User.findOne(req.param('id'), function(err, user) {
+  //       if (err) return next(err);
+  //       if (!user) return next(res.i18n('The user does not exist.'));
+        
+  //       user.defaultLanguage = req.param('lang');
+  //       user.save(function (err, user) {
+  //         if(err) return next(err);
+  //       });
+
+  //       res.redirect('/user');
+  //     });
+  // },
 
   /**
    * Overrides for the settings in `config/controllers.js`

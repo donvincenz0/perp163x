@@ -54,7 +54,8 @@ module.exports = function (grunt) {
 
     'linker/js/jquery.js',
     'linker/js/jquery.validate.js',
-
+    'linker/js/jquery.validate.datefix.js',
+  
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',

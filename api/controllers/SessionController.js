@@ -28,11 +28,10 @@ module.exports = {
 		// Check for email and password in params sent via the form, if none
 		// redirect the browser back to the sign-in form.
 		if(!req.param('email') || !req.param('password')) {
-			// return next:((err: ["Le mot de passe ne correspond pas au mot de passe de confirmation."])});
 
 			var usernamePasswordRequiredError = [{name: 'usernamePasswordRequired', message: res.i18n('Please enter a valid email address and password.')}];
 
-			// Remember that err is the object being passwrd down (a.k.a. flash.err), whose value is another 
+			// Remember that err is the object being passed down (a.k.a. flash.err), whose value is another 
 			// object with the key of usernamePasswordRequiredError
 			req.session.flash = {
 				err: usernamePasswordRequiredError
@@ -74,6 +73,9 @@ module.exports = {
 				// Log user in
 				req.session.authenticated = true;
 				req.session.User = user; 
+
+				// Set language to user's default language
+				req.session.lang = user.defaultLanguage;
 
 				// Change status to online
 				user.online = true;
@@ -126,8 +128,14 @@ module.exports = {
 				});
 			}
 
+			// Save session language before destroying the session
+			saveLangBeforeSessionIsDestroyed = req.session.lang;
+
 			// Wipe out the session (log out)
 			req.session.destroy();
+
+			// Reassign session language after session's detroyed (to keep language consistency when browsing the site, even when the user sign out)
+			// req.session.lang = saveLangBeforeSessionIsDestroyed;
 
 			// Redirect the browser to the sign-in screen
 			res.redirect('/session/new');	

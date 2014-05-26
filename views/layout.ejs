@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%- title %></title>
-
+    <!-- <title><%- title %></title> -->
+    <title>PERP163x</title>
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -30,9 +30,10 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/linker/styles/bootstrap.css">
     <link rel="stylesheet" href="/linker/styles/custom.css">
+    <link rel="stylesheet" href="/linker/styles/jquery-ui-1.10.4.custom.css">
     <!--STYLES END-->
 
-    <!--Added this so the client has access to the csrf taf and it's grabbed first service side on every page -->
+    <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
     <script type="text/javascript">
       window.donvincenzo = { csrf : "<%= _csrf %>" };
     </script>
@@ -46,7 +47,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -54,52 +55,89 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><%= __("PERP in details") %></a>
-          <a class="navbar-brand" href="/"><%= __("FAQ") %></a>
-          <a class="navbar-brand" href="/user/new"><%= __("Sign up") %></a>
-          <a class="navbar-brand" href="/"><%= __("Blog") %></a>
-          <a class="navbar-brand" href="/"><%= __("Contact us") %></a>
+          <a class="navbar-brand" href="/"><%= __("PERP 163x") %></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <% if (session.authenticated) { %>
-              <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.firstname + " " + session.User.lastname %></a></li>
-            <% } %>
+            <li><a class="navbar-brand" href="/"><%= __("FAQ") %></a></li>
+            <li><a class="navbar-brand" href="/"><%= __("Blog") %></a></li>
+            <li><a class="navbar-brand" href="/"><%= __("Contact us") %></a></li>
             <% if (session.authenticated && session.User.admin) { %>
-              <li><a href="/user"><%= __('User Administration') %></a></li>
+              <li><a href="/user"><%= __('Administration') %></a></li>
             <% } %>
           </ul>
           <div class="navbar-right">
             <% if (!session.authenticated) { %>
-            <form class="navbar-form navbar-right" action="/session/create">
-              <div class="form-group">
-                <input type="text" placeholder="Email" name="email" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="password" placeholder="Mot de Passe" name="password" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-success"><%= __("Sign in") %></button>
-              <input type="hidden" name="_csrf" value="<% _csrf %>" />
-            </form>
-            <% } else { %>
-            <form class="navbar-form navbar-right" action="/session/destroy">
-              <button type="submit" class="btn btn-default"><%= __("Sign out") %></button>
-              <input type="hidden" name="_csrf" value="<% _csrf %>" />
-            </form>x
-            <% } %>
-            
-              <form id="formLang" class="navbar-form navbar-right" action="" method="GET">
-                <select name="lang" id="lang" class="form-control"> 
-                  <option value="en" <% if (session.lang === "en") { %> selected <% } %> >English</option> 
-                  <option value="fr" <% if (session.lang === "fr") { %> selected <% } %> >French</option> 
-                </select>
+              <form class="navbar-form navbar-left" action="/session/create">
+                <div class="form-group">
+                  <label class="control-label sr-only" for="email"><%= __('Email') %></label>
+                  <input type="text" placeholder="Email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="control-label sr-only" for="password"><%= __('Password') %></label>
+                  <input type="password" placeholder="Mot de Passe" name="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success"><%= __("Sign in") %></button>         
+                <input type="hidden" name="_csrf" value="<% _csrf %>" />
+              </form>
+              <form class="navbar-form navbar-left" action="/user/new"> 
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary"><%= __("Sign up") %>
+                  <input type="hidden" name="_csrf" value="<% _csrf %>" />
+                </div>
+              </form>
+              <form id="formLang" class="navbar-form navbar-right" method="POST">
+                <div class="form-group">
+                  <label class="control-label sr-only" for="lang"><%= __('Language') %></label>
+                  <select name="lang" id="lang" class="form-control"> 
+                    <option value="en" <% if (session.lang === "en") { %> selected <% } %> >English</option> 
+                    <option value="fr" <% if (session.lang === "fr") { %> selected <% } %> >French</option> 
+                  </select>
+                </div>
                 <input type="hidden" name="_csrf" value="<%= _csrf %>" />
               </form>
-            
+            <% } else { %>
+              <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <% if (session.User.firstname || session.User.lastname) { %>
+                      <%= session.User.firstname + " " + session.User.lastname %>
+                    <% } else { %>
+                      <%= session.User.email %>
+                    <% } %>
+                    <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Show') + ' ' + __('profile') %></a></li>
+                    
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Beneficiaries / fund transfers') %></a></li>
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Portfolio management') %></a></li>
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Arbitrage options') %></a></li>
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Payment details') %></a></li>                      
+                    <li class="divider"></li>
+                    <li><a href="/session/destroy"><button type="submit" class="btn btn-danger"><%= __("Sign out") %></button></a></li>
+                    <li class="divider"></li>
+                    <li class="disabled"><a href="#"><%= __('Default language') %>:</a></li>
+                    <li>
+                      <form id="formLang" class="navbar-form" method="POST">
+                        <div class="form-group">
+                          <label class="control-label sr-only" for="lang"><%= __('Language') %></label>
+                          <select name="lang" id="lang" class="form-control"> 
+                            <option value="en" <% if (session.lang === "en") { %> selected <% } %> >English</option> 
+                            <option value="fr" <% if (session.lang === "fr") { %> selected <% } %> >French</option> 
+                          </select>
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                      </form>
+                  </li>
+                  </ul>
+                </li>
+              </ul>
+            <% } %>
           </div>
         </div>
       </div>
-    </div>
+    </nav>
 
     <%- body %>
 
@@ -164,11 +202,14 @@
     <!--SCRIPTS-->
     <script src="/linker/js/socket.io.js"></script>
     <script src="/linker/js/sails.io.js"></script>
-    <script src="/linker/js/app.js"></script>
     <script src="/linker/js/jquery.js"></script>
     <script src="/linker/js/jquery.validate.js"></script>
+    <script src="/linker/js/jquery.validate.datefix.js"></script>
+    <script src="/linker/js/app.js"></script>
     <script src="/linker/js/bootstrap.js"></script>
     <script src="/linker/js/customValidate.js"></script>
+    <script src="/linker/js/customjQueryUI.js"></script>
+    <script src="/linker/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="/linker/js/underscore.js"></script>
     <!--SCRIPTS END-->
 
