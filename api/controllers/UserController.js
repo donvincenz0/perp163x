@@ -104,7 +104,6 @@ module.exports = {
           req.session.editUserOnlyThisSection = req.param('editUserOnlyThisSection');
         }
 
-
         res.view({
           user: user,
         });
@@ -113,7 +112,29 @@ module.exports = {
 
    // process the info from the edit view
    update: function(req, res, next) {
-   		User.update(req.param('id'), req.params.all(), function userUpdated(err){
+      
+      var dataToUpdate = "";
+      
+      // specific update for bank accounts
+      if(req.param('nbOfAccounts')) {
+        var numberOfAccounts = req.param('nbOfAccounts');
+        dataToUpdate += '{"bankAccount": {"nbOfAccounts" : "' + numberOfAccounts + '",';
+        for (var count=1; count<=numberOfAccounts; count++){
+          dataToUpdate += '"account_' + count +  
+            '": {"iban": "' + req.param('iban_' + count) +
+            '", "bankName ": "' + req.param('bankName_' + count) +
+            '", "branchName ": "' + req.param('branchName_' + count) +
+            '", "bankAddress ": "' + req.param('bankAddress_' + count) + '"},';
+        }
+        // remove last comma
+        dataToUpdate = dataToUpdate.substring(0, dataToUpdate.length - 1);
+        dataToUpdate += "}}";
+        dataToUpdate = JSON.parse(dataToUpdate);
+      } else {
+        dataToUpdate = req.params.all();
+      }
+
+   		User.update(req.param('id'), dataToUpdate, function userUpdated(err){
    			if (err){
           console.log(err);
           
@@ -141,6 +162,7 @@ module.exports = {
           res.redirect('/user/edit/' + req.param('id'));
         }		
    		});
+      
    },
 
    destroy: function (req, res, next) {

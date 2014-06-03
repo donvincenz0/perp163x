@@ -55,15 +55,17 @@ module.exports = function (grunt) {
     'linker/js/jquery.js',
     'linker/js/jquery.validate.js',
     'linker/js/jquery.validate.datefix.js',
+    'linker/js/jquery.validate.additional-methods.js',
   
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',
 
-    // *->    put other dependencies here   <-*
-
     // All of the rest of your app scripts imported here
-    'linker/**/*.js'
+    'linker/**/*.js',
+
+    // Ignore nolinker folder by adding ! at the beginning (first character)
+    '!linker/nolinker/**/*.js'
   ];
 
 
@@ -116,6 +118,13 @@ module.exports = function (grunt) {
 
   // Modify js file injection paths to use 
   jsFilesToInject = jsFilesToInject.map(function (path) {
+    // Custom patch to ignore the files/folder that starts by ! 
+    // modified by Vincent J. on 20140528
+    if(/^[!]/.test(path)) {
+      // add ! to ignore the file (grunt syntax) and remove the ! from the original filename
+      return '!.tmp/public/' + path.substring(1);
+    }
+
     return '.tmp/public/' + path;
   });
   

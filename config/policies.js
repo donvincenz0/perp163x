@@ -25,7 +25,7 @@ module.exports.policies = {
   	show		: ["localize", "userCanSeeProfile"],
   	edit		: ["localize", "flash", "userCanSeeProfile"],
   	update		: ["localize", "flash", "userCanSeeProfile"],
-  	'*'			: ["localize", "admin"]
+  	'*'			: ["localize", "userCanSeeProfile"]
   },
 
   /*

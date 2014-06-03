@@ -38,12 +38,12 @@
       window.donvincenzo = { csrf : "<%= _csrf %>" };
     </script>
 
-    <!-- The sound file that will play on activity events -->
+    <!-- The sound file that will play on activity events 
     <audio id="chatAudio">
       <source src="/sounds/notify.ogg" type="audio/ogg">
       <source src="/sounds/notify.mp3" type="audio/mpeg">
       <source src="/sounds/notify.wav" type="audio/wav">
-    </audio>
+    </audio> -->
   </head>
 
   <body>
@@ -68,7 +68,7 @@
           </ul>
           <div class="navbar-right">
             <% if (!session.authenticated) { %>
-              <form class="navbar-form navbar-left" action="/session/create">
+              <form class="navbar-form navbar-left navbar-form-signin-validate" action="/session/create">
                 <div class="form-group">
                   <label class="control-label sr-only" for="email"><%= __('Email') %></label>
                   <input type="text" placeholder="Email" name="email" class="form-control">
@@ -205,6 +205,7 @@
     <script src="/linker/js/jquery.js"></script>
     <script src="/linker/js/jquery.validate.js"></script>
     <script src="/linker/js/jquery.validate.datefix.js"></script>
+    <script src="/linker/js/jquery.validate.additional-methods.js"></script>
     <script src="/linker/js/app.js"></script>
     <script src="/linker/js/bootstrap.js"></script>
     <script src="/linker/js/customValidate.js"></script>
@@ -212,6 +213,14 @@
     <script src="/linker/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="/linker/js/underscore.js"></script>
     <!--SCRIPTS END-->
+
+    <!-- Language selection for jQuery.validate plugin -->
+    <% if(session.lang && session.lang !== 'en'){ %>
+      <script src=<%= "/linker/nolinker/js/jquery.validate.localization/messages_" + session.lang + ".js" %> ></script>
+    <% } %>
+
+    <!-- Edit user bank account function used for views/user/edit.ejs -->
+     <script src="/linker/nolinker/js/user/edit.js"></script>
 
     <!-- Submit function for the language selector - Using JQUERY so need to be located after JQUERY is loaded -->
     <script type="text/javascript">

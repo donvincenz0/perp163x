@@ -1,0 +1,29 @@
+<div class="form-group">
+	<div class="col-md-12">
+		<div class="form-group">
+			<div class="col-md-12 control-label">
+				<h3><%= label.account %> <%= count %> 
+					<button type="button" class="btn btn-default btn-lg removeBankAccountclass">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
+				</h3>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="iban_<%= count %>" class="col-md-4 control-label"><%= label.IBAN %></label>
+			<div class="col-md-8"><input <% if(user.iban) { %>value="<%= user.iban %>"<% } else { %>placeholder="<%= label.IBAN %>"<% } %> name="iban_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= label.bankName %></label>
+			<div class="col-md-8"><input <% if(user.bankName) { %>value="<%= user.bankName %>"<% } else { %>placeholder="<%= label.bankName %>"<% } %> name="bankName_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= label.branchName %></label>
+			<div class="col-md-8"><input <% if(user.branchName) { %>value="<%= user.branchName %>"<% } else { %>placeholder="<%= label.branchName %>"<% } %> name="branchName_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= label.bankAddress %></label>
+			<div class="col-md-8"><input <% if(user.bankAddress) { %>value="<%= user.bankAddress %>"<% } else { %>placeholder="<%= label.bankAddress %>"<% } %> name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+	</div>
+</div>

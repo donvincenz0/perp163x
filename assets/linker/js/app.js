@@ -78,7 +78,7 @@ function cometMessageReceivedFromServer(message) {
 }
 
 function displayFlashActivity(message) {
-  $('#chatAudio')[0].play();
+  //$('#chatAudio')[0].play();
   $(".navbar").after("<div class='alert alert-success'>" + message.data.firstname + " " + message.data.lastname + message.data.action + "</div>");
   $(".alert").fadeOut(5000);
 }

@@ -162,136 +162,180 @@
 					</div>									
 				</div>
 			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-12">
+			<hr>
 			<div class="row">
-				<div class="col-md-6 show-user-sections">
-				<h3>
-					<form action="/user/edit/<%= user.id %>" method="POST">
-						<div class="form-group">
-							<div class="col-md-9">
-								<label class="control-label"><%= __('Personal info') %></label>
-							</div>
-							<div class="col-md-3">
-								<input type="submit" class="btn btn-sm btn-primary" value="<%= __('Edit') %>">
-								<input type="hidden" name="editUserSection" value="personalInfo">
-								<input type="hidden" name="editUserOnlyThisSection" value="true">
-								<input type="hidden" name="_csrf" value="<%= _csrf %>">
-							</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12 show-user-sections">
+						<h3>
+							<form action="/user/edit/<%= user.id %>" method="POST">
+								<div class="form-group">
+									<div class="col-md-9">
+										<label class="control-label"><%= __('Personal info') %></label>
+									</div>
+									<div class="col-md-3">
+										<input type="submit" class="btn btn-sm btn-primary" value="<%= __('Edit') %>">
+										<input type="hidden" name="editUserSection" value="personalInfo">
+										<input type="hidden" name="editUserOnlyThisSection" value="true">
+										<input type="hidden" name="_csrf" value="<%= _csrf %>">
+									</div>
+								</div>
+							</form>
+						</h3>
 						</div>
-					</form>
-				</h3>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Marital status') %></label>
+						<div class="col-md-6 show-user-values">
+							<% if(user.maritalStatus === 'single') { %>
+					  			<%= __('Single') %>
+					  		<% } else if(user.maritalStatus === 'married') { %>
+					  			<%= __('Married') %>
+					  		<% } else if(user.maritalStatus === 'divorced') { %>
+					  			<%= __('Divorced') %>			  		
+					  		<% } else if(user.maritalStatus === 'widowed') { %>
+					  			<%= __('Widowed') %>
+					  		<% } else if(user.maritalStatus === 'pacs') { %>
+					  			<%= __('Partner bound by a solidarity civil pact (PACS)') %>	
+					  		<% } else if(user.maritalStatus === 'livingTogether') { %>
+					  			<%= __('Living together') %>
+					  		<% } else { %>
+					  			&nbsp;
+					  		<% } %>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Matrimonial regime') %></label>
+						<div class="col-md-6 show-user-values"><% if(user.matrimonialRegime) { %><%= user.matrimonialRegime %><% } %></div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Occupation (latest if retired)') %></label>
+						<div class="col-md-6 show-user-values"><% if(user.occupation) { %><%= user.occupation %><% } %></div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Social regime') %></label>
+						<div class="col-md-6 show-user-values">
+							<% if(user.socialRegime === 'SS') { %>
+					  			<%= __('SS') %>
+					  		<% } else if(user.socialRegime === 'TNS') { %>
+					  			<%= __('TNS') %>
+					  		<% } else if(user.socialRegime === 'agricultural') { %>
+					  			<%= __('Agricultural') %>			  		
+					  		<% } else if(user.socialRegime === 'agricultor') { %>
+					  			<%= __('Agricultor') %>
+					  		<% } else if(user.socialRegime === 'artisan') { %>
+					  			<%= __('Artisan, commerce and CEOs') %>	
+					  		<% } else if(user.socialRegime === 'intermediary') { %>
+					  			<%= __('Intermediary profession') %>
+					  		<% } else if(user.socialRegime === 'executive') { %>
+					  			<%= __('Executive, teacher, liberal, scientific or artistic profession') %>
+					  		<% } else if(user.socialRegime === 'salaryMan') { %>
+					  			<%= __('Salary man') %>
+					  		<% } else if(user.socialRegime === 'worker') { %>
+					  			<%= __('Worker') %>
+					  		<% } else if(user.socialRegime === 'retired') { %>
+					  			<%= __('Retired') %>
+					  		<% } else if(user.socialRegime === 'noprofessionalActivity') { %>
+					  			<%= __('Without any professional activity') %>
+					  		<% } else { %>
+					  			&nbsp;
+					  		<% } %>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Type of industry') %></label>
+						<div class="col-md-6 show-user-values"><% if(user.jobTypeOfIndustry) { %><%= user.jobTypeOfIndustry %><% } %></div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Expected retirement age (years)') %></label>
+						<div class="col-md-6 show-user-values"><% if(user.expectedRetirementAge) { %><%= user.expectedRetirementAge %><% } %></div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Family yearly gross income range') %></label>
+						<div class="col-md-6 show-user-values">
+							<% if(user.familyYearlyGrossIncomeRange === 'below50') { %>
+					  			<%= __('below') %> 50 000€
+					  		<% } else if(user.familyYearlyGrossIncomeRange === '50to80') { %>
+					  			<%= __('from') %> 50 000 <%= __('to') %> 80 000€
+					  		<% } else if(user.familyYearlyGrossIncomeRange === '80to120') { %>
+					  			<%= __('from') %> 80 000 <%= __('to') %> 120 000€
+					  		<% } else if(user.familyYearlyGrossIncomeRange === '120to160') { %>
+					  			<%= __('from') %> 120 000 <%= __('to') %> 160 000€
+					  		<% } else if(user.familyYearlyGrossIncomeRange === '160to300') { %>
+					  			<%= __('from') %> 160 000 <%= __('to') %> 300 000€			  		
+					  		<% } else if(user.familyYearlyGrossIncomeRange === 'above300') { %>
+					  			<%= __('above') %> 300 000€				  	
+					  		<% } else { %>
+					  			&nbsp;
+					  		<% } %>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-6 show-user-labels"><%= __('Family assets range') %></label>
+						<div class="col-md-6 show-user-values">
+							<% if(user.familyAssetsRange === 'below150') { %>
+					  			<%= __('below') %> 150 000€
+					  		<% } else if(user.familyAssetsRange === '150to750') { %>
+					  			<%= __('from') %> 150 000 <%= __('to') %> 750 000€
+					  		<% } else if(user.familyAssetsRange === '750to1.5M') { %>
+					  			<%= __('from') %> 750 000 <%= __('to') %> 1,5M€
+					  		<% } else if(user.familyAssetsRange === '1.5Mto5M') { %>
+					  			<%= __('from') %> 1,5M€ <%= __('to') %> 5M€
+					  		<% } else if(user.familyAssetsRange === '5Mto15M') { %>
+					  			<%= __('from') %> 5M€ <%= __('to') %> 15M€			  		
+					  		<% } else if(user.familyAssetsRange === 'above15M') { %>
+					  			<%= __('above') %> 15M€			  	
+					  		<% } else { %>
+					  			&nbsp;
+					  		<% } %>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Marital status') %></label>
-				<div class="col-md-3 show-user-values">
-					<% if(user.maritalStatus === 'single') { %>
-			  			<%= __('Single') %>
-			  		<% } else if(user.maritalStatus === 'married') { %>
-			  			<%= __('Married') %>
-			  		<% } else if(user.maritalStatus === 'divorced') { %>
-			  			<%= __('Divorced') %>			  		
-			  		<% } else if(user.maritalStatus === 'widowed') { %>
-			  			<%= __('Widowed') %>
-			  		<% } else if(user.maritalStatus === 'pacs') { %>
-			  			<%= __('Partner bound by a solidarity civil pact (PACS)') %>	
-			  		<% } else if(user.maritalStatus === 'livingTogether') { %>
-			  			<%= __('Living together') %>
-			  		<% } else { %>
-			  			&nbsp;
-			  		<% } %>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Matrimonial regime') %></label>
-				<div class="col-md-3 show-user-values"><% if(user.matrimonialRegime) { %><%= user.matrimonialRegime %><% } %></div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Occupation (latest if retired)') %></label>
-				<div class="col-md-3 show-user-values"><% if(user.occupation) { %><%= user.occupation %><% } %></div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Social regime') %></label>
-				<div class="col-md-3 show-user-values">
-					<% if(user.socialRegime === 'SS') { %>
-			  			<%= __('SS') %>
-			  		<% } else if(user.socialRegime === 'TNS') { %>
-			  			<%= __('TNS') %>
-			  		<% } else if(user.socialRegime === 'agricultural') { %>
-			  			<%= __('Agricultural') %>			  		
-			  		<% } else if(user.socialRegime === 'agricultor') { %>
-			  			<%= __('Agricultor') %>
-			  		<% } else if(user.socialRegime === 'artisan') { %>
-			  			<%= __('Artisan, commerce and CEOs') %>	
-			  		<% } else if(user.socialRegime === 'intermediary') { %>
-			  			<%= __('Intermediary profession') %>
-			  		<% } else if(user.socialRegime === 'executive') { %>
-			  			<%= __('Executive, teacher, liberal, scientific or artistic profession') %>
-			  		<% } else if(user.socialRegime === 'salaryMan') { %>
-			  			<%= __('Salary man') %>
-			  		<% } else if(user.socialRegime === 'worker') { %>
-			  			<%= __('Worker') %>
-			  		<% } else if(user.socialRegime === 'retired') { %>
-			  			<%= __('Retired') %>
-			  		<% } else if(user.socialRegime === 'noprofessionalActivity') { %>
-			  			<%= __('Without any professional activity') %>
-			  		<% } else { %>
-			  			&nbsp;
-			  		<% } %>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Type of industry') %></label>
-				<div class="col-md-3 show-user-values"><% if(user.jobTypeOfIndustry) { %><%= user.jobTypeOfIndustry %><% } %></div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Expected retirement age (if blank, 67yo will be saved by default)') %></label>
-				<div class="col-md-3 show-user-values"><% if(user.expectedRetirementAge) { %><%= user.expectedRetirementAge %><% } %></div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Family yearly gross income range') %></label>
-				<div class="col-md-3 show-user-values">
-					<% if(user.familyYearlyGrossIncomeRange === 'below50') { %>
-			  			<%= __('below') %> 50 000€
-			  		<% } else if(user.familyYearlyGrossIncomeRange === '50to80') { %>
-			  			<%= __('from') %> 50 000 <%= __('to') %> 80 000€
-			  		<% } else if(user.familyYearlyGrossIncomeRange === '80to120') { %>
-			  			<%= __('from') %> 80 000 <%= __('to') %> 120 000€
-			  		<% } else if(user.familyYearlyGrossIncomeRange === '120to160') { %>
-			  			<%= __('from') %> 120 000 <%= __('to') %> 160 000€
-			  		<% } else if(user.familyYearlyGrossIncomeRange === '160to300') { %>
-			  			<%= __('from') %> 160 000 <%= __('to') %> 300 000€			  		
-			  		<% } else if(user.familyYearlyGrossIncomeRange === 'above300') { %>
-			  			<%= __('above') %> 300 000€				  	
-			  		<% } else { %>
-			  			&nbsp;
-			  		<% } %>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 show-user-labels"><%= __('Family assets range') %></label>
-				<div class="col-md-3 show-user-values">
-					<% if(user.familyAssetsRange === 'below150') { %>
-			  			<%= __('below') %> 150 000€
-			  		<% } else if(user.familyAssetsRange === '150to750') { %>
-			  			<%= __('from') %> 150 000 <%= __('to') %> 750 000€
-			  		<% } else if(user.familyAssetsRange === '750to1.5M') { %>
-			  			<%= __('from') %> 750 000 <%= __('to') %> 1,5M€
-			  		<% } else if(user.familyAssetsRange === '1.5Mto5M') { %>
-			  			<%= __('from') %> 1,5M€ <%= __('to') %> 5M€
-			  		<% } else if(user.familyAssetsRange === '5Mto15M') { %>
-			  			<%= __('from') %> 5M€ <%= __('to') %> 15M€			  		
-			  		<% } else if(user.familyAssetsRange === 'above15M') { %>
-			  			<%= __('above') %> 15M€			  	
-			  		<% } else { %>
-			  			&nbsp;
-			  		<% } %>
-				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12 show-user-sections">
+						<h3>
+							<form action="/user/edit/<%= user.id %>" method="POST">
+								<div class="form-group">
+									<div class="col-md-9">
+										<label class="control-label"><%= __('Payment info') %></label>
+									</div>
+									<div class="col-md-3">
+										<input type="submit" class="btn btn-sm btn-primary" value="<%= __('Edit') %>">
+										<input type="hidden" name="editUserSection" value="bankAccount">
+										<input type="hidden" name="editUserOnlyThisSection" value="true">
+										<input type="hidden" name="_csrf" value="<%= _csrf %>">
+									</div>
+								</div>
+							</form>
+						</h3>
+						</div>
+					</div>
+				<%
+				if(user.bankAccount.nbOfAccounts > 0){
+					for (var countAccounts = 1; countAccounts <= user.bankAccount.nbOfAccounts; countAccounts++) { 
+						var accountName = "account_" + countAccounts;
+				%>
+						<div class="row">
+							<label class="col-md-6 show-user-labels"><%= __('IBAN') %></label>
+							<div class="col-md-6 show-user-values"><% if(user.bankAccount.account_1.iban) { %><%= user.bankAccount.account_1.iban %><% } %></div>
+						</div>
+						<div class="row">
+							<label class="col-md-6 show-user-labels"><%= __('Bank name') %></label>
+							<div class="col-md-6 show-user-values"><% if(user.bankAccount.account_1.bankName) { %><%= user.bankAccount.account_1.bankName %><% } %></div>
+						</div>
+						<div class="row">
+							<label class="col-md-6 show-user-labels"><%= __('Branch name') %></label>
+							<div class="col-md-6 show-user-values"><% if(user.bankAccount.account_1.branchName) { %><%= user.bankAccount.account_1.branchName %><% } %></div>
+						</div>
+						<div class="row">
+							<label class="col-md-6 show-user-labels"><%= __('Bank address') %></label>
+							<div class="col-md-6 show-user-values"><% if(user.bankAccount.account_1.bankAddress) { %><%= user.bankAccount.account_1.bankAddress %><% } %></div>
+						</div>
+				<% }
+					} %>
+
 			</div>
 		</div>
-	</div>
+	</div>	
 </div>

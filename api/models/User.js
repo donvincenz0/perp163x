@@ -129,7 +129,7 @@ module.exports = {
 	maritalStatus: {
 		type: 'string'
 	},
-
+	
 	matrimonialRegime: {
 		type: 'string'
 	},
@@ -160,9 +160,13 @@ module.exports = {
 		type: 'string'
 	},
 
-	defaultLanguage:{
+	defaultLanguage: {
 		type: 'string',
 		defaultsTo: 'en'
+	},
+
+	bankAccount: {
+		type: 'json'
 	},
 
 	toJSON: function() {
