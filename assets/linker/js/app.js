@@ -63,7 +63,7 @@
 );
 
 function cometMessageReceivedFromServer(message) {
-  console.log("Here's the message: ", message);
+  //console.log("Here's the message: ", message);
   // Ok, I need to route this message to the appropriate place
 
   // This message has to do with the User Model
@@ -152,7 +152,7 @@ var UserIndexPage = {
     $( 'tr:last' ).after(
 
       // This is the path to the templates file
-      JST['assets/linker/templates/addUser.ejs']( obj )
+      JST['assets/linker/templates/user/show_addUser.ejs']( obj )
     );
   },
 

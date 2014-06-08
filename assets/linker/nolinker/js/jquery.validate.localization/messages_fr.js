@@ -45,6 +45,7 @@
 		require_from_group: "Veuillez fournir au moins {0} de ces champs.",
 		nifES: "Veuillez fournir un numéro NIF valide.",
 		nieES: "Veuillez fournir un numéro NIE valide.",
-		cifES: "Veuillez fournir un numéro CIF valide."
+		cifES: "Veuillez fournir un numéro CIF valide.",
+		iban: "Veuillez fournir un numéro IBAN valide."
 	});
 }(jQuery));

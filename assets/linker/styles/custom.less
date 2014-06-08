@@ -40,6 +40,32 @@ body {
 	}
 }
 
+/* 
+  used for:
+  	round border div
+  used in:
+	/user/show.ejs 
+*/
+.custom-round-border {
+	border: 1px solid @blue;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 10px 40px 10px;
+}
+
+/* 
+  used for:
+  	div parent of custom-round-border
+  used in:
+	/user/show.ejs 
+  
+*/
+.custom-div-parent-round-border {
+	padding: 10px 40px 10px;
+}
+
+
 .form-signin,
 .form-user-edit {
 	max-width: 30%;
@@ -47,7 +73,7 @@ body {
 	margin: 0 auto 20px;
 	margin-top: 20px;
 	background-color: @lightGray;
-	border: 1px solid @green;
+	border: 1px solid @darkBlue;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;

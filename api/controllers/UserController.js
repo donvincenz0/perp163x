@@ -118,14 +118,24 @@ module.exports = {
       // specific update for bank accounts
       if(req.param('nbOfAccounts')) {
         var numberOfAccounts = req.param('nbOfAccounts');
+
         dataToUpdate += '{"bankAccount": {"nbOfAccounts" : "' + numberOfAccounts + '",';
-        for (var count=1; count<=numberOfAccounts; count++){
-          dataToUpdate += '"account_' + count +  
-            '": {"iban": "' + req.param('iban_' + count) +
-            '", "bankName ": "' + req.param('bankName_' + count) +
-            '", "branchName ": "' + req.param('branchName_' + count) +
-            '", "bankAddress ": "' + req.param('bankAddress_' + count) + '"},';
+        
+        for (var count=1; count<=numberOfAccounts; count++) {
+          // move array up in case the accounts number do not follow themselves
+          if(!req.param('iban_' + count)){
+            numberOfAccounts++;
+          }
+          else {
+            dataToUpdate += '"account_' + count +  
+            '": {"label": "' + req.param('label_' + count) +
+            '", "iban": "' + req.param('iban_' + count) +
+            '", "bankName": "' + req.param('bankName_' + count) +
+            '", "branchName": "' + req.param('branchName_' + count) +
+            '", "bankAddress": "' + req.param('bankAddress_' + count) + '"},';
+          }
         }
+
         // remove last comma
         dataToUpdate = dataToUpdate.substring(0, dataToUpdate.length - 1);
         dataToUpdate += "}}";

@@ -159,7 +159,7 @@ $(document).ready(function(){
 			},
 			familyAssetsRange: {
 				required: true
-			}		
+			},	
 		},
 		// This is executed in case of error input
 		highlight: function(element, errorClass, validClass) {
@@ -294,5 +294,33 @@ $(document).ready(function(){
 			"familyYearlyGrossIncomeRange":"",
 			"familyAssetsRange":"",
 		}
+	});
+
+	// Add rules for user account
+	$('[name*="label_"]').each(function() {
+	    $(this).rules('add', {
+	        required: true
+	    });
+	});
+	$('[name*="iban_"]').each(function() {
+	    $(this).rules('add', {
+	        required: true,
+	        iban: true
+	    });
+	});
+	$('[name*="bankName_"]').each(function() {
+	    $(this).rules('add', {
+	        required: true
+	    });
+	});
+	$('[name*="branchName_"]').each(function() {
+	    $(this).rules('add', {
+	        required: true
+	    });
+	});
+	$('[name*="bankAddress_"]').each(function() {
+	    $(this).rules('add', {
+	        required: true
+	    });
 	});
 });
