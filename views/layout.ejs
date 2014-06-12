@@ -6,7 +6,6 @@
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
     <!--  
         Stylesheets and Preprocessors
         ==============================
@@ -28,22 +27,15 @@
     -->
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/linker/styles/bootstrap.css">
-    <link rel="stylesheet" href="/linker/styles/custom.css">
-    <link rel="stylesheet" href="/linker/styles/jquery-ui-1.10.4.custom.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/jquery-ui-1.10.4.custom.css">
     <!--STYLES END-->
 
     <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
     <script type="text/javascript">
       window.donvincenzo = { csrf : "<%= _csrf %>" };
     </script>
-
-    <!-- The sound file that will play on activity events 
-    <audio id="chatAudio">
-      <source src="/sounds/notify.ogg" type="audio/ogg">
-      <source src="/sounds/notify.mp3" type="audio/mpeg">
-      <source src="/sounds/notify.wav" type="audio/wav">
-    </audio> -->
   </head>
 
   <body>
@@ -51,7 +43,7 @@
         Client-side Templates
         ========================
 
-    		HTML templates are important prerequisites of modern, rich client applications.
+        HTML templates are important prerequisites of modern, rich client applications.
         To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
         that you load these templates client-side.
 
@@ -96,28 +88,24 @@
     -->
 
     <!--SCRIPTS-->
-    <script src="/linker/js/socket.io.js"></script>
-    <script src="/linker/js/sails.io.js"></script>
-    <script src="/linker/js/jquery.js"></script>
-    <script src="/linker/js/jquery.validate.js"></script>
-    <script src="/linker/js/jquery.validate.datefix.js"></script>
-    <script src="/linker/js/jquery.validate.additional-methods.js"></script>
-    <script src="/linker/js/app.js"></script>
-    <script src="/linker/js/angular.js"></script>
-    <script src="/linker/js/bootstrap.js"></script>
-    <script src="/linker/js/customValidate.js"></script>
-    <script src="/linker/js/customjQueryUI.js"></script>
-    <script src="/linker/js/jquery-ui-1.10.4.custom.js"></script>
-    <script src="/linker/js/underscore.js"></script>
+    <script src="/js/dependencies/loadFirst/jquery.js"></script>
+    <script src="/js/dependencies/loadFirst/sails.io.js"></script>
+    <script src="/js/dependencies/loadSecond/jquery-ui-1.10.4.custom.js"></script>
+    <script src="/js/dependencies/loadSecond/jquery.validate.js"></script>
+    <script src="/js/dependencies/loadSecond/underscore.js"></script>
+    <script src="/js/dependencies/loadThird/angular.js"></script>
+    <script src="/js/dependencies/loadThird/bootstrap.js"></script>
+    <script src="/js/dependencies/loadThird/jquery.validate.additional-methods.js"></script>
+    <script src="/js/dependencies/loadThird/jquery.validate.datefix.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/customValidate.js"></script>
+    <script src="/js/customjQueryUI.js"></script>
     <!--SCRIPTS END-->
 
     <!-- Language selection for jQuery.validate plugin -->
     <% if(session.lang && session.lang !== 'en'){ %>
-      <script src=<%= "/linker/nolinker/js/jquery.validate.localization/messages_" + session.lang + ".js" %> ></script>
+      <script src=<%= "/nolinker/js/jquery.validate.localization/messages_" + session.lang + ".js" %> ></script>
     <% } %>
-
-    <!-- Edit user bank account function used for views/user/edit.ejs -->
-     <script src="/linker/nolinker/js/user/edit.js"></script>
 
     <!-- Submit function for the language selector - Using JQUERY so need to be located after JQUERY is loaded -->
     <script type="text/javascript">

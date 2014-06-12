@@ -1,16 +1,15 @@
 /**
- * User
- *
- * @module      :: Model
- * @description :: Represents a user of the site
- * @docs		:: http://sailsjs.org/#!documentation/models
- */
+* User.js
+*
+* @description :: TODO: You might write a short summary of how this model works and what it represents here.
+* @docs        :: http://sailsjs.org/#!documentation/models
+*/
 
 module.exports = {
+  
+  schema: true,
 
   attributes: {
-
-  	schema: true,
 
   	title: {
   		type: 'string'

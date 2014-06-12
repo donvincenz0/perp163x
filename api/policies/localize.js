@@ -32,7 +32,7 @@ module.exports = function (req, res, next) {
  	// if a user is connected and changed the language
  	if (req.session.User && lang) {
  		// Update the user's default language
-		User.findOne(req.session.User.id).done(function(err, user) {
+		User.findOne(req.session.User.id).exec(function(err, user) {
 			if (err) return next(err);
   			if(!user) return next();
 			user.defaultLanguage = lang;

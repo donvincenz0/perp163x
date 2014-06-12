@@ -1,3 +1,6 @@
+<!-- Edit user bank account function used for views/user/edit.ejs -->
+<script src="/nolinker/js/user/edit.js"></script>
+
 <!-- Edit form -->
 <form action="/user/update/<%= user.id %>" method="POST" class="form-horizontal form-user-edit form-validate">
 	<div class="form-group">
@@ -415,56 +418,101 @@
 		<div class="col-md-12" id="bankAccountInputWrapper">
 		<!-- Accounts edit form -->
 	<%	
-		var initialNbOfAccounts = user.bankAccount.nbOfAccounts;
-		for (var count=1; count <= initialNbOfAccounts; count++) { 
-			var account = eval("user.bankAccount.account_" + count);
-	%>
-			<!-- Check if account exists, if not shift to the next account -->
-	<%		if (!account) {
-				initialNbOfAccounts++;
-			}
-			else {
-				indexOfAccounts.push("account_" + count);
-	%>
-				<div class="form-group bg-info custom-round-border">
-					<div class="col-md-12">
-						<div class="form-group">
-							<div class="col-md-12 control-label">
-									<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="label_<%= count %>" class="col-md-4 control-label"><%= __('Label') %></label>
-							<div class="col-md-8"><input <% if(account.label) { %>value="<%= account.label %>"<% } else { %>placeholder="<%= __('Label') %>"<% } %> name="label_<%= count %>" type="text" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label for="iban_<%= count %>" class="col-md-4 control-label"><%= __('IBAN') %></label>
-							<div class="col-md-8"><input <% if(account.iban) { %>value="<%= account.iban %>"<% } else { %>placeholder="<%= __('IBAN') %>"<% } %> name="iban_<%= count %>" type="text" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= __('Bank name') %></label>
-							<div class="col-md-8"><input <% if(account.bankName) { %>value="<%= account.bankName %>"<% } else { %>placeholder="<%= __('Bank name') %>"<% } %> name="bankName_<%= count %>" type="text" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= __('Branch name') %></label>
-							<div class="col-md-8"><input <% if(account.branchName) { %>value="<%= account.branchName %>"<% } else { %>placeholder="<%= __('Branch name') %>"<% } %> name="branchName_<%= count %>" type="text" class="form-control"/></div>
-						</div>
-						<div class="form-group">
-							<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= __('Bank address') %></label>
-							<div class="col-md-8"><input <% if(account.bankAddress) { %>value="<%= account.bankAddress %>"<% } else { %>placeholder="<%= __('Bank address') %>"<% } %> name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+		if(!user.bankAccount) {
+			initialNbOfAccounts = 1;
+			count = initialNbOfAccounts;
+			indexOfAccounts.push("account_" + count);
+		%>
+			<div class="form-group bg-info custom-round-border">
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="col-md-12 control-label">
+								<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
 						</div>
 					</div>
+					<div class="form-group">
+						<label for="label_<%= count %>" class="col-md-4 control-label"><%= __('Label') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Label') %>" name="label_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="iban_<%= count %>" class="col-md-4 control-label"><%= __('IBAN') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('IBAN') %>" name="iban_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= __('Bank name') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Bank name') %>" name="bankName_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= __('Branch name') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Branch name') %>" name="branchName_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= __('Bank address') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Bank address') %>" name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+					</div>
 				</div>
-		<%	}
+			</div>
+		<%
+		} else {
+		%>
+			<!-- Get initialNbOfAccounts -->
+		<%	initialNbOfAccounts = user.bankAccount.nbOfAccounts; 
+
+			for (var count=1; count <= initialNbOfAccounts; count++) { 
+				var account = null;
+				if(user.bankAccount) {
+					account = eval("user.bankAccount.account_" + count);
+				}
+		%>
+				<!-- Check if account exists, if not shift to the next account -->
+		<%		if (!account) {
+					initialNbOfAccounts++;
+				}
+				else {
+					indexOfAccounts.push("account_" + count);
+		%>
+					<div class="form-group bg-info custom-round-border">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-12 control-label">
+										<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
+											<span class="glyphicon glyphicon-minus"></span>
+										</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="label_<%= count %>" class="col-md-4 control-label"><%= __('Label') %></label>
+								<div class="col-md-8"><input <% if(account.label) { %>value="<%= account.label %>"<% } else { %>placeholder="<%= __('Label') %>"<% } %> name="label_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="iban_<%= count %>" class="col-md-4 control-label"><%= __('IBAN') %></label>
+								<div class="col-md-8"><input <% if(account.iban) { %>value="<%= account.iban %>"<% } else { %>placeholder="<%= __('IBAN') %>"<% } %> name="iban_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= __('Bank name') %></label>
+								<div class="col-md-8"><input <% if(account.bankName) { %>value="<%= account.bankName %>"<% } else { %>placeholder="<%= __('Bank name') %>"<% } %> name="bankName_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= __('Branch name') %></label>
+								<div class="col-md-8"><input <% if(account.branchName) { %>value="<%= account.branchName %>"<% } else { %>placeholder="<%= __('Branch name') %>"<% } %> name="branchName_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= __('Bank address') %></label>
+								<div class="col-md-8"><input <% if(account.bankAddress) { %>value="<%= account.bankAddress %>"<% } else { %>placeholder="<%= __('Bank address') %>"<% } %> name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+						</div>
+					</div>
+			<%	}
+			}
 		} %>
 			</div>
 		</div>
 		<!-- Button to add new bank account as per requested by user-->
 		<div class="form-group">
 			<div class="col-md-12 control-label">
-				<input type="hidden" value="<%= user.bankAccount.nbOfAccounts %>" name="nbOfAccounts">
+				<input type="hidden" value="<%= initialNbOfAccounts %>" name="nbOfAccounts">
 				<input type="hidden" name="indexOfAccounts" data-accounts-index="<%= indexOfAccounts %>">
 				<%
 					var addBankAccountData = '{ "userId": "' + user.id + '", "label": { "maxReached" : "' + __('Max number of accounts reached') + '" , "label" : "' + __('Label') + '" , "account" : "' + __('Account') + '" , "IBAN" : "' + __('IBAN') + '" , "bankName": "' + __('Bank name') + '" , "branchName": "' + __('Branch name') + '" , "bankAddress": "' + __('Bank address') + '" } }';
