@@ -66,7 +66,7 @@
 	</div>
 	<div class="form-group">
 		<label for="birthDate" class="col-md-4 control-label"><%= __('Date of birth') %></label> 
-		<div class="col-md-8"><input <% if(user.birthDate) { %>value="<%= user.birthDate %>"<% } else { %>placeholder="<%= __("Date of birth") %>"<% } %> name="birthDate" type="text" class="form-control" id="datepickerBirthday"/></div>
+		<div class="col-md-8"><input <% if(user.birthDate) { %>value="<%= user.GetBirthDate() %>"<% } else { %>placeholder="<%= __("Date of birth") %>"<% } %> name="birthDate" type="text" class="form-control" id="datepickerBirthday"/></div>
 	</div>
 	<div class="form-group">
 		<label for="birthPlace" class="col-md-4 control-label"><%= __('Birth place') %></label> 
@@ -114,7 +114,7 @@
 	</div>
 	<div class="form-group">
 		<label for="idCardExpirationDate" class="col-md-4 control-label"><%= __('Expiration date') %></label>
-		<div class="col-md-8"><input <% if(user.idCardExpirationDate) { %>value="<%= user.idCardExpirationDate %>"<% } else { %>placeholder="<%= __("Expiration date") %>"<% } %> name="idCardExpirationDate" type="text" class="form-control datepicker"/></div>
+		<div class="col-md-8"><input <% if(user.idCardExpirationDate) { %>value="<%= user.GetIdCardExpirationDate() %>"<% } else { %>placeholder="<%= __("Expiration date") %>"<% } %> name="idCardExpirationDate" type="text" class="form-control datepicker"/></div>
 	</div>
 	<div class="form-group">
 		<label for="idCardNumber" class="col-md-4 control-label"><%= __('Number') %></label>
@@ -122,7 +122,7 @@
 	</div>
 	<div class="form-group">
 		<label for="idCardIssuanceDate" class="col-md-4 control-label"><%= __('Issuance date') %></label>
-		<div class="col-md-8"><input <% if(user.idCardIssuanceDate) { %>value="<%= user.idCardIssuanceDate %>"<% } else { %>placeholder="<%= __("Issuance date") %>"<% } %> name="idCardIssuanceDate" type="text" class="form-control datepicker"/></div>
+		<div class="col-md-8"><input <% if(user.idCardIssuanceDate) { %>value="<%= user.GetIdCardIssuanceDate() %>"<% } else { %>placeholder="<%= __("Issuance date") %>"<% } %> name="idCardIssuanceDate" type="text" class="form-control datepicker"/></div>
 	</div>
 	<div class="form-group">
 		<label for="idCardIssuanceCity" class="col-md-4 control-label"><%= __('Issuance city') %></label>

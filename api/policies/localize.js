@@ -17,7 +17,7 @@ module.exports = function (req, res, next) {
 
 	// if nobody's connected or user's default language not set or no language selection has been made by non-connected user, default to this one
  	if (!req.session.lang) {
- 		req.session.lang = 'en';
+ 		req.session.lang = 'fr';
  	}
 
  	// case where a new language has been selected

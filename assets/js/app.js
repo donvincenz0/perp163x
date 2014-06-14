@@ -19,12 +19,13 @@
   socket.on('connect', function socketConnected() {
 
     // Listen for Comet messages from Sails on User model
-    socket.on('user',  function(cometEvent) {
+    socket.on('user',  function(message) {
       // Handle inbound messages related to a user record
-      console.log("Here's the message: ", cometEvent);
-      updateUserInDom(user.id, user);
+      console.log("Here's the message: ", message);
+      var userID = message.id;
+      updateUserInDom(userID, message);
 
-      if(user.verb !== "destroyed") {
+      if(message.verb !== "destroyed") {
         displayFlashActivity(message);
       }
     });
@@ -76,7 +77,7 @@ function displayFlashActivity(message) {
   $(".alert").fadeOut(5000);
 }
 
-function updateUserInDom(userId, user) {
+function updateUserInDom(userId, message) {
 
   // What page am I on?
   var page = document.location.pathname;
@@ -91,17 +92,17 @@ function updateUserInDom(userId, user) {
     case '/user':
 
       // This is a message coming from publishUpdate
-      if (user.verb === 'updated') {
-        UserIndexPage.updateUser(userId, user);
+      if (message.verb === 'updated') {
+        UserIndexPage.updateUser(userId, message);
       }
 
       // This is a message coming from publishCreate
-      if (user.verb === 'created') {
-        UserIndexPage.addUser(user);
+      if (message.verb === 'created') {
+        UserIndexPage.addUser(message);
       }
 
       // This is a message coming from publishDestroy
-      if (user.verb === 'destroyed') {
+      if (message.verb === 'destroyed') {
         UserIndexPage.destroyUser(userId);
       }
 
@@ -140,7 +141,7 @@ var UserIndexPage = {
     $( 'tr:last' ).after(
 
       // This is the path to the templates file
-      JST['assets/linker/templates/user/show_addUser.ejs']( obj )
+      JST['assets/templates/user/show_addUser.ejs']( obj )
     );
   },
 

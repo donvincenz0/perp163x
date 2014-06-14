@@ -5,10 +5,12 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var dateFormat = require('dateformat');
+
 module.exports = {
   
   schema: true,
-
+  
   attributes: {
 
   	title: {
@@ -167,6 +169,18 @@ module.exports = {
 	bankAccount: {
 		type: 'json'
 	},
+
+  	GetBirthDate: function() {
+  		return dateFormat(this.birthDate, 'yyyy/mm/dd'); 
+  	},
+
+  	GetIdCardExpirationDate: function() {
+  		return dateFormat(this.idCardExpirationDate, 'yyyy/mm/dd'); 
+  	},
+
+  	GetIdCardIssuanceDate: function() {
+  		return dateFormat(this.idCardIssuanceDate, 'yyyy/mm/dd'); 
+  	},
 
 	toJSON: function() {
 		var obj = this.toObject();

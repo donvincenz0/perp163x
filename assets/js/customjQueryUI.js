@@ -6,7 +6,7 @@
     	changeMonth: true
     });
     $( ".datepicker" ).datepicker({
-      	dateFormat: "yy/mm/dd",
+      dateFormat: "yy/mm/dd",
     	changeYear: true,
     	changeMonth: true  	
     });

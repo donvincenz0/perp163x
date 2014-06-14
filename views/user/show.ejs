@@ -63,7 +63,7 @@
 							</div>
 							<div class="row">
 								<label class="col-md-6 show-user-labels"><%= __('Date of birth') %></label>
-								<div class="col-md-6 show-user-values"><% if(user.birthDate) { %><%= user.birthDate %><% } %></div>
+								<div class="col-md-6 show-user-values"><% if(user.birthDate) { %><%= user.GetBirthDate() %><% } %></div>
 							</div>
 							<div class="row">
 								<label class="col-md-6 show-user-labels"><%= __("Birth place") %></label>
@@ -140,7 +140,7 @@
 							</div>
 							<div class="row">
 								<label class="col-md-6 show-user-labels"><%= __('Expiration date') %></label>
-								<div class="col-md-6 show-user-values"><% if(user.idCardExpirationDate) { %><%= user.idCardExpirationDate %><% } %></div>
+								<div class="col-md-6 show-user-values"><% if(user.idCardExpirationDate) { %><%= user.GetIdCardExpirationDate() %><% } %></div>
 							</div>
 							<div class="row">
 								<label class="col-md-6 show-user-labels"><%= __('Number') %></label>
@@ -148,7 +148,7 @@
 							</div>
 							<div class="row">
 								<label class="col-md-6 show-user-labels"><%= __('Issuance date') %></label>
-								<div class="col-md-6 show-user-values"><% if(user.idCardIssuanceDate) { %><%= user.idCardIssuanceDate %><% } %></div>
+								<div class="col-md-6 show-user-values"><% if(user.idCardIssuanceDate) { %><%= user.GetIdCardIssuanceDate() %><% } %></div>
 							</div>
 							<div class="row">
 									<label class="col-md-6 show-user-labels"><%= __('Issuance city') %></label>
