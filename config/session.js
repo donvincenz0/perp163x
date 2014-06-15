@@ -20,7 +20,7 @@ module.exports.session = {
   secret: 'c5a2f449b7b0ea6d4cc3043ede69391f',
 
   // Use in Memory
-  //adapter: 'memory'
+  adapter: 'memory'
 
   // Set the session cookie expire time
   // The maxAge is set by milliseconds, the example below is for 24 hours
@@ -32,18 +32,18 @@ module.exports.session = {
 
   // In production, uncomment the following lines to set up a shared redis session store
   // that can be shared across multiple Sails.js servers
-  adapter: 'redis',
+  // adapter: 'redis',
   //
   // The following values are optional, if no options are set a redis instance running
   // on localhost is expected.
   // Read more about options at: https://github.com/visionmedia/connect-redis
   //
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  // //ttl: <redis session TTL in seconds>,
-  db: process.env.REDIS_DB,
-  pass: process.env.REDIS_PASS,
-  prefix: 'sess:'
+  // host: process.env.REDIS_HOST,
+  // port: process.env.REDIS_PORT,
+  // // //ttl: <redis session TTL in seconds>,
+  // db: process.env.REDIS_DB,
+  // pass: process.env.REDIS_PASS,
+  // prefix: 'sess:'
 
 
   // Uncomment the following lines to use your Mongo adapter as a session store
