@@ -1,27 +1,34 @@
 /**
- * User
- *
- * @module      :: Model
- * @description :: Represents a user of the site
- * @docs		:: http://sailsjs.org/#!documentation/models
- */
+* User.js
+*
+* @description :: TODO: You might write a short summary of how this model works and what it represents here.
+* @docs        :: http://sailsjs.org/#!documentation/models
+*/
+
+var dateFormat = require('dateformat');
 
 module.exports = {
+  
+  schema: true,
 
   attributes: {
 
-  	schema: true,
+  	title: {
+  		type: 'string'
+  	},
 
 	lastname: {
-		type: 'string',
-		required: true
+		type: 'string'
 	},
 
 	firstname: {
-		type: 'string',
-		required: true
+		type: 'string'
 	},
 
+	maidenName: {
+		type: 'string'
+	},
+	
 	email: {
 		type: 'string',
 		email: true,
@@ -41,20 +48,152 @@ module.exports = {
 	admin: {
 		type: 'boolean',
 		defaultsTo: false
-	}
+	},
+
+	role: {
+		type: 'string',
+		defaultTo: 'client'
+	},
     
-	//toJSON: function() {
-	//	var obj = this.toObject();
-	//	delete obj.password;
-	//	delete obj.confirmation;
-	//	delete obj._csrf;
-	//	return obj;
-	//}
+	birthDate: {
+		type: 'DATE'		
+	},
+
+	birthPlace: {
+		type: 'string'
+	},
+
+	birthDepartment: {
+		type: 'string'
+	},
+
+	addressStreetNumber: {
+		type: 'string'
+	},
+
+	addressStreet: {
+		type: 'string'
+	},
+
+	postalCode: {
+		type: 'string'
+	},
+
+	city: {
+		type: 'string'
+	},
+
+	country: {
+		type: 'string'
+	},
+
+	phoneNumberHome: {
+		type: 'string'
+	},
+
+	phoneNumberMobile: {
+		type: 'string'
+	},
+
+	idCardType: {
+		type: 'string'
+	},
+
+	idCardExpirationDate: {
+		type: 'DATE'
+	},
+
+	idCardNumber: {
+		type: 'string'
+	},
+
+	idCardIssuanceCity: {
+		type: 'string'
+	},
+
+	idCardIssuanceCountry: {
+		type: 'string'
+	},
+
+	idCardIssuanceDate: {
+		type: 'DATE'
+	},
+
+	idCardIssuanceAuthority: {
+		type: 'string'
+	},
+
+	nationality: {
+		type: 'string'
+	},
+
+	maritalStatus: {
+		type: 'string'
+	},
+	
+	matrimonialRegime: {
+		type: 'string'
+	},
+
+	occupation: {
+		type: 'string'
+	},
+
+	socialRegime: {
+		type: 'string'
+	},
+
+	// In french: Secteur d'activité
+	jobTypeOfIndustry: {
+		type: 'string'
+	},
+
+	expectedRetirementAge: {
+		type: 'integer'
+	},
+
+	// In french: revenus brut annuel du foyer
+	familyYearlyGrossIncomeRange: {
+		type: 'string'
+	},
+
+	familyAssetsRange: {
+		type: 'string'
+	},
+
+	defaultLanguage: {
+		type: 'string',
+		defaultsTo: 'fr'
+	},
+
+	bankAccount: {
+		type: 'json'
+	},
+
+  	GetBirthDate: function() {
+  		return dateFormat(this.birthDate, 'yyyy/mm/dd'); 
+  	},
+
+  	GetIdCardExpirationDate: function() {
+  		return dateFormat(this.idCardExpirationDate, 'yyyy/mm/dd'); 
+  	},
+
+  	GetIdCardIssuanceDate: function() {
+  		return dateFormat(this.idCardIssuanceDate, 'yyyy/mm/dd'); 
+  	},
+
+	toJSON: function() {
+		var obj = this.toObject();
+		delete obj.password;
+		delete obj.confirmation;
+		delete obj._csrf;
+		return obj;
+	}
 
   },
 
   beforeValidation: function (values, next) {
-  	console.log(values)
+  	//console.log(values)
   	if (typeof values.admin !== 'undefined') {
   		if (values.admin === 'unchecked') {
   			values.admin = false;

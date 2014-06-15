@@ -1,5 +1,9 @@
-<form action="/user/create" method="POST" class="form-signin">
-	<h2 class="form-signin-heading"><%= __("New account") %></h2>
+<form action="/user/create" method="POST" class="form-horizontal form-signin form-validate">
+	<div class="form-group">
+		<div class="col-md-12">
+			<h2 class="form-signin-heading"><%= __("New account") %></h2>
+		</div>
+	</div>
 
 	<% if(flash && flash.err) { %>
 		<ul class="alert alert-success">
@@ -9,13 +13,28 @@
 		</ul>
 	<% } %>
 
-	<input type="text" class="form-control" placeholder="<%= __("firstname") %>" name="firstname">
-	<input type="text" class="form-control" placeholder="<%= __("lastname") %>" name="lastname">
-	<input type="text" class="form-control" placeholder="<%= __("email address") %>" name="email">
-	<input type="password" class="form-control" placeholder="<%= __("password") %>" name="password">
-	<input type="password" class="form-control" placeholder="<%= __("password confirmation") %>" name="confirmation">	
-	<br />
-
-	<input type="submit" class="btn btn-lg btn-primary btn-block" value="<%= __("Sign up") %>">
-	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	<div class="form-group">
+		<label for="email" class="col-md-0 control-label sr-only"><%= __("Email") %></label>
+		<div class="col-md-12">
+			<input type="text" class="form-control" placeholder="<%= __("Email") %>" name="email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-md-0 control-label sr-only"><%= __("Password") %></label>
+		<div class="col-md-12">
+			<input type="password" class="form-control" placeholder="<%= __("Password") %>" name="password" id="password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="confirmation" class="col-md-0 control-label sr-only"><%= __("Password confirmation") %></label>
+		<div class="col-md-12">
+			<input type="password" class="form-control" placeholder="<%= __("Password confirmation") %>" name="confirmation">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<input type="submit" class="btn btn-lg btn-primary btn-block" value="<%= __("Sign up") %>">
+			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+		</div>
+	</div>
 </form>

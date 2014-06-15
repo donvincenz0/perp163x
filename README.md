@@ -1,2 +1,3 @@
-# dualconseils_perp
-### a Sails application
+# perp163x
+
+a [Sails](http://sailsjs.org) application

@@ -1,18 +1,541 @@
-<form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
-	<h2><%= __('Update a user') %></h2>
+<!-- Edit user bank account function used for views/user/edit.ejs -->
+<script src="/nolinker/js/user/edit.js"></script>
 
-	<input value="<%= user.lastname %>" name="lastname" type="text" class="form-control"/>
-	<input value="<%= user.firstname %>" name="firstname" type="text" class="form-control"/>
-	<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
-	<% if (session.authenticated && session.User.admin) { %>
-		<% if (user.admin) { %>
-			<input type="hidden" name="admin" value="unchecked">
-			<label class="checkbox"><input type="checkbox" name="admin" checked>Admin</label>
-		<% } else { %>
-			<input type="hidden" name="admin" value="unchecked">
-			<label class="checkbox"><input type="checkbox" name="admin">Admin</label>
-		<% } %>
+<!-- Edit form -->
+<form action="/user/update/<%= user.id %>" method="POST" class="form-horizontal form-user-edit form-validate">
+	<div class="form-group">
+		<div class="col-md-12">
+			<h2><%= __('Edit profile') %></h2>
+			<h2>
+				<% if (session.editUserSection === 'basic') 		{ %> <%= __('Basic info') %><% } %>
+				<% if (session.editUserSection === 'idCard')		{ %> <%= __('ID card') %><% } %>
+				<% if (session.editUserSection === 'personalInfo') 	{ %> <%= __('Personal info') %><% } %>
+			</h2>
+		</div>
+	</div>
+	 
+	<!-- Progress bar -->
+	 <div class="form-group">
+		<div class="col-md-12">
+			<div class="progress">
+	  			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+	   				60% <%= __('Completion') %>
+	  			</div>
+			</div>
+		</div>
+	</div>
+
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+			<% Object.keys(flash.err ).forEach(function(error) { %>
+			<li><%- JSON.stringify(flash.err[error]) %></li>
+			<% }) %>
+		</ul>
 	<% } %>
-	<input type="submit" value="<%= __('Proceed') %>" class="btn btn-lg btn-primary btn-block"/>
-	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+	<!-- Basic Info -->
+	<% if (session.editUserSection === 'basic') { %>
+	<div class="form-group">
+		<label for="title" class="col-md-4 control-label"><%= __('Title') %></label> 
+		<div class="col-md-8">
+		  <label class="radio-inline">
+		    <input type="radio" name="title" value="Ms." <% if(user.title === 'Ms.') { %> checked <% } %> >
+		   	<%= __('Ms.') %>
+		  </label>
+		  <label class="radio-inline">
+		    <input type="radio" name="title" value="Miss" <% if(user.title === 'Miss') { %> checked <% } %> >
+		   	<%= __('Miss') %>
+		  </label>
+		  <label class="radio-inline">
+		    <input type="radio" name="title" value="Mr." <% if(user.title === 'Mr.') { %> checked <% } %> >
+		   	<%= __('Mr.') %>
+		  </label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="firstname" class="col-md-4 control-label"><%= __('Firstname') %></label> 
+		<div class="col-md-8"><input <% if(user.firstname) { %>value="<%= user.firstname %>"<% } else { %>placeholder="<%= __("Firstname") %>"<% } %> name="firstname" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-md-4 control-label"><%= __('Lastname') %></label> 
+		<div class="col-md-8"><input <% if(user.lastname) { %>value="<%= user.lastname %>"<% } else { %>placeholder="<%= __("Lastname") %>"<% } %> name="lastname" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="maidenName" class="col-md-4 control-label"><%= __('Maiden name') %></label> 
+		<div class="col-md-8"><input <% if(user.maidenName) { %>value="<%= user.maidenName %>"<% } else { %>placeholder="<%= __("Maiden name") %>"<% } %> name="maidenName" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="birthDate" class="col-md-4 control-label"><%= __('Date of birth') %></label> 
+		<div class="col-md-8"><input <% if(user.birthDate) { %>value="<%= user.GetBirthDate() %>"<% } else { %>placeholder="<%= __("Date of birth") %>"<% } %> name="birthDate" type="text" class="form-control" id="datepickerBirthday"/></div>
+	</div>
+	<div class="form-group">
+		<label for="birthPlace" class="col-md-4 control-label"><%= __('Birth place') %></label> 
+		<div class="col-md-8"><input <% if(user.birthPlace) { %>value="<%= user.birthPlace %>"<% } else { %>placeholder="<%= __("Birth place") %>"<% } %> name="birthPlace" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="birthDepartment" class="col-md-4 control-label"><%= __('Department of birth place') %></label> 
+		<div class="col-md-8"><input <% if(user.birthDepartment) { %>value="<%= user.birthDepartment %>"<% } else { %>placeholder="<%= __("Department of birth place") %>"<% } %> name="birthDepartment" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="addressStreetNumber" class="col-md-4 control-label"><%= __('Street number') %></label> 
+		<div class="col-md-8"><input <% if(user.addressStreetNumber) { %>value="<%= user.addressStreetNumber %>"<% } else { %>placeholder="<%= __("Street number") %>"<% } %> name="addressStreetNumber" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="addressStreet" class="col-md-4 control-label"><%= __('Address') %></label> 
+		<div class="col-md-8"><input <% if(user.addressStreet) { %>value="<%= user.addressStreet %>"<% } else { %>placeholder="<%= __("Address") %>"<% } %> name="addressStreet" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="postalCode" class="col-md-4 control-label"><%= __('Postal code') %></label> 
+		<div class="col-md-8"><input <% if(user.postalCode) { %>value="<%= user.postalCode %>"<% } else { %>placeholder="<%= __("Postal code") %>"<% } %> name="postalCode" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="city" class="col-md-4 control-label"><%= __('City') %></label> 
+		<div class="col-md-8"><input <% if(user.city) { %>value="<%= user.city %>"<% } else { %>placeholder="<%= __("City") %>"<% } %> name="city" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="country" class="col-md-4 control-label"><%= __('Country') %></label> 
+		<div class="col-md-8"><input <% if(user.country) { %>value="<%= user.country %>"<% } else { %>placeholder="<%= __("Country") %>"<% } %> name="country" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="phoneNumberHome" class="col-md-4 control-label"><%= __('Home phone') %></label>
+		<div class="col-md-8"><input <% if(user.phoneNumberHome) { %>value="<%= user.phoneNumberHome %>"<% } else { %>placeholder="<%= __("Home phone") %>"<% } %> name="phoneNumberHome" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="phoneNumberMobile" class="col-md-4 control-label"><%= __('Mobile phone') %></label>
+		<div class="col-md-8"><input <% if(user.phoneNumberMobile) { %>value="<%= user.phoneNumberMobile %>"<% } else { %>placeholder="<%= __("Mobile phone") %>"<% } %> name="phoneNumberMobile" type="text" class="form-control"/></div>
+	</div>
+	<% } %>
+
+	<!-- Id card -->
+	<% if (session.editUserSection === 'idCard') { %>
+	<div class="form-group">
+		<label for="idCardType" class="col-md-4 control-label"><%= __('Type') %></label>
+		<div class="col-md-8"><input <% if(user.idCardType) { %>value="<%= user.idCardType %>"<% } else { %>placeholder="<%= __("Type") %>"<% } %> name="idCardType" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardExpirationDate" class="col-md-4 control-label"><%= __('Expiration date') %></label>
+		<div class="col-md-8"><input <% if(user.idCardExpirationDate) { %>value="<%= user.GetIdCardExpirationDate() %>"<% } else { %>placeholder="<%= __("Expiration date") %>"<% } %> name="idCardExpirationDate" type="text" class="form-control datepicker"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardNumber" class="col-md-4 control-label"><%= __('Number') %></label>
+		<div class="col-md-8"><input <% if(user.idCardNumber) { %>value="<%= user.idCardNumber %>"<% } else { %>placeholder="<%= __("Number") %>"<% } %> name="idCardNumber" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardIssuanceDate" class="col-md-4 control-label"><%= __('Issuance date') %></label>
+		<div class="col-md-8"><input <% if(user.idCardIssuanceDate) { %>value="<%= user.GetIdCardIssuanceDate() %>"<% } else { %>placeholder="<%= __("Issuance date") %>"<% } %> name="idCardIssuanceDate" type="text" class="form-control datepicker"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardIssuanceCity" class="col-md-4 control-label"><%= __('Issuance city') %></label>
+		<div class="col-md-8"><input <% if(user.idCardIssuanceCity) { %>value="<%= user.idCardIssuanceCity %>"<% } else { %>placeholder="<%= __("Issuance city") %>"<% } %> name="idCardIssuanceCity" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardIssuanceCountry" class="col-md-4 control-label"><%= __('Issuance country') %></label>
+		<div class="col-md-8"><input <% if(user.idCardIssuanceCountry) { %>value="<%= user.idCardIssuanceCountry %>"<% } else { %>placeholder="<%= __("Issuance country") %>"<% } %> name="idCardIssuanceCountry" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="idCardIssuanceAuthority" class="col-md-4 control-label"><%= __('Issuance authority') %></label>
+		<div class="col-md-8"><input <% if(user.idCardIssuanceAuthority) { %>value="<%= user.idCardIssuanceAuthority %>"<% } else { %>placeholder="<%= __("Issuance authority") %>"<% } %> name="idCardIssuanceAuthority" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="nationality" class="col-md-4 control-label"><%= __('Nationality') %></label>
+		<div class="col-md-8"><input <% if(user.nationality) { %>value="<%= user.nationality %>"<% } else { %>placeholder="<%= __("Nationality") %>"<% } %> name="nationality" type="text" class="form-control"/></div>
+	</div>
+	<% } %>
+
+	<!-- Personal Info -->
+	<% if (session.editUserSection === 'personalInfo') { %>
+	<div class="form-group">
+		<label for="maritalStatus" class="col-md-4 control-label"><%= __('Marital status') %></label>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="maritalStatus" value="single" <% if(user.maritalStatus === 'single') { %> checked <% } %> >
+					   	<%= __('Single') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="maritalStatus" value="married" <% if(user.maritalStatus === 'married') { %> checked <% } %> >
+					   	<%= __('Married') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+				    	<input type="radio" name="maritalStatus" value="divorced" <% if(user.maritalStatus === 'divorced') { %> checked <% } %> >
+				   		<%= __('Divorced') %>
+				  	  </label>
+				  	</div>
+				</div>
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="maritalStatus" value="widowed" <% if(user.maritalStatus === 'widowed') { %> checked <% } %> >
+					   	<%= __('Widowed') %>
+					  </label>
+					</div>
+			  	</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="maritalStatus" value="pacs" <% if(user.maritalStatus === 'pacs') { %> checked <% } %> >
+					   	<%= __('Partner bound by a solidarity civil pact (PACS)') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="maritalStatus" value="livingTogether" <% if(user.maritalStatus === 'livingTogether') { %> checked <% } %> >
+					   	<%= __('Living together') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="matrimonialRegime" class="col-md-4 control-label"><%= __('Matrimonial regime') %></label>
+		<div class="col-md-8"><input <% if(user.matrimonialRegime) { %>value="<%= user.matrimonialRegime %>"<% } else { %>placeholder="<%= __("Matrimonial regime") %>"<% } %> name="matrimonialRegime" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="occupation" class="col-md-4 control-label"><%= __('Occupation (latest if retired)') %></label>
+		<div class="col-md-8"><input <% if(user.occupation) { %>value="<%= user.occupation %>"<% } else { %>placeholder="<%= __("Occupation") %>"<% } %> name="occupation" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="socialRegime" class="col-md-4 control-label"><%= __('Social regime') %></label>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="SS" <% if(user.socialRegime === 'SS') { %> checked <% } %> >
+					   	<%= __('SS') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="TNS" <% if(user.socialRegime === 'TNS') { %> checked <% } %> >
+					   	<%= __('TNS') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-4">			
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="agricultural" <% if(user.socialRegime === 'agricultural') { %> checked <% } %> >
+					   	<%= __('Agricultural') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">					
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="agricultor" <% if(user.socialRegime === 'agricultor') { %> checked <% } %> >
+					   	<%= __('Agricultor') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="intermediary" <% if(user.socialRegime === 'intermediary') { %> checked <% } %> >
+					   	<%= __('Intermediary profession') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="artisan" <% if(user.socialRegime === 'artisan') { %> checked <% } %> >
+					   	<%= __('Artisan, commerce and CEOs') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="executive" <% if(user.socialRegime === 'executive') { %> checked <% } %> >
+					   	<%= __('Executive, teacher, liberal, scientific or artistic profession') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="salaryMan" <% if(user.socialRegime === 'salaryMan') { %> checked <% } %> >
+					   	<%= __('Salary man') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-6">					
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="worker" <% if(user.socialRegime === 'worker') { %> checked <% } %> >
+					   	<%= __('Worker') %>
+					  </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">					
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="retired" <% if(user.socialRegime === 'retired') { %> checked <% } %> >
+					   	<%= __('Retired') %>
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-6">					
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="socialRegime" value="noprofessionalActivity" <% if(user.socialRegime === 'noprofessionalActivity') { %> checked <% } %> >
+					   	<%= __('Without any professional activity') %>
+					  </label>
+					</div>
+				</div>
+			</div>				
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="jobTypeOfIndustry" class="col-md-4 control-label"><%= __('Type of industry') %></label>
+		<div class="col-md-8"><input <% if(user.jobTypeOfIndustry) { %>value="<%= user.jobTypeOfIndustry %>"<% } else { %>placeholder="<%= __("Type of industry") %>"<% } %> name="jobTypeOfIndustry" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="expectedRetirementAge" class="col-md-4 control-label"><%= __('Expected retirement age (if blank, 67yo will be saved by default)') %></label>
+		<div class="col-md-8"><input <% if(user.expectedRetirementAge) { %>value="<%= user.expectedRetirementAge %>"<% } else { %>placeholder="<%= __("Expected retirement age (if blank, 67yo will be saved by default)") %>"<% } %> name="expectedRetirementAge" type="text" class="form-control"/></div>
+	</div>
+	<div class="form-group">
+		<label for="familyYearlyGrossIncomeRange" class="col-md-4 control-label"><%= __('Family yearly gross income range') %></label>
+		<div class="col-md-8">
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="below50" <% if(user.familyYearlyGrossIncomeRange === 'below50') { %> checked <% } %> >
+			   	<%= __('below') %> 50 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="50to80" <% if(user.familyYearlyGrossIncomeRange === '50to80') { %> checked <% } %> >
+			   	<%= __('from') %> 50 000 <%= __('to') %> 80 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="80to120" <% if(user.familyYearlyGrossIncomeRange === '80to120') { %> checked <% } %> >
+			   	<%= __('from') %> 80 000 <%= __('to') %> 120 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="120to160" <% if(user.familyYearlyGrossIncomeRange === '120to160') { %> checked <% } %> >
+			   	<%= __('from') %> 120 000 <%= __('to') %> 160 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="160to300" <% if(user.familyYearlyGrossIncomeRange === '160to300') { %> checked <% } %> >
+			   	<%= __('from') %> 160 000 <%= __('to') %> 300 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyYearlyGrossIncomeRange" value="above300" <% if(user.familyYearlyGrossIncomeRange === 'above300') { %> checked <% } %> >
+			   	<%= __('above') %> 300 000€
+			  </label>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="familyAssetsRange" class="col-md-4 control-label"><%= __('Family assets range') %></label>
+		<div class="col-md-8">
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="below150" <% if(user.familyAssetsRange === 'below150') { %> checked <% } %> >
+			   	<%= __('below') %> 150 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="150to750" <% if(user.familyAssetsRange === '150to750') { %> checked <% } %> >
+			   	<%= __('from') %> 150 000 <%= __('to') %> 750 000€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="750to1.5M" <% if(user.familyAssetsRange === '750to1.5M') { %> checked <% } %> >
+			   	<%= __('from') %> 750 000 <%= __('to') %> 1,5M€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="1.5Mto5M" <% if(user.familyAssetsRange === '1.5Mto5M') { %> checked <% } %> >
+			   	<%= __('from') %> 1,5M€ <%= __('to') %> 5M€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="5Mto15M" <% if(user.familyAssetsRange === '5Mto15M') { %> checked <% } %> >
+			   	<%= __('from') %> 5M€ <%= __('to') %> 15M€
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="familyAssetsRange" value="above15M" <% if(user.familyAssetsRange === 'above15M') { %> checked <% } %> >
+			   	<%= __('above') %> 15M€
+			  </label>
+			</div>
+		</div>
+	</div>
+	<% } %>
+
+	<!-- Bank account -->
+	<% if (session.editUserSection === 'bankAccount') {
+		var indexOfAccounts = new Array();
+	%>
+	<div class="form-group">
+		<div class="col-md-12" id="bankAccountInputWrapper">
+		<!-- Accounts edit form -->
+	<%	
+		if(!user.bankAccount) {
+			initialNbOfAccounts = 1;
+			count = initialNbOfAccounts;
+			indexOfAccounts.push("account_" + count);
+		%>
+			<div class="form-group bg-info custom-round-border">
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="col-md-12 control-label">
+								<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="label_<%= count %>" class="col-md-4 control-label"><%= __('Label') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Label') %>" name="label_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="iban_<%= count %>" class="col-md-4 control-label"><%= __('IBAN') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('IBAN') %>" name="iban_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= __('Bank name') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Bank name') %>" name="bankName_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= __('Branch name') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Branch name') %>" name="branchName_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+					<div class="form-group">
+						<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= __('Bank address') %></label>
+						<div class="col-md-8"><input placeholder="<%= __('Bank address') %>" name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+					</div>
+				</div>
+			</div>
+		<%
+		} else {
+		%>
+			<!-- Get initialNbOfAccounts -->
+		<%	initialNbOfAccounts = user.bankAccount.nbOfAccounts; 
+
+			for (var count=1; count <= initialNbOfAccounts; count++) { 
+				var account = null;
+				if(user.bankAccount) {
+					account = eval("user.bankAccount.account_" + count);
+				}
+		%>
+				<!-- Check if account exists, if not shift to the next account -->
+		<%		if (!account) {
+					initialNbOfAccounts++;
+				}
+				else {
+					indexOfAccounts.push("account_" + count);
+		%>
+					<div class="form-group bg-info custom-round-border">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-12 control-label">
+										<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
+											<span class="glyphicon glyphicon-minus"></span>
+										</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="label_<%= count %>" class="col-md-4 control-label"><%= __('Label') %></label>
+								<div class="col-md-8"><input <% if(account.label) { %>value="<%= account.label %>"<% } else { %>placeholder="<%= __('Label') %>"<% } %> name="label_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="iban_<%= count %>" class="col-md-4 control-label"><%= __('IBAN') %></label>
+								<div class="col-md-8"><input <% if(account.iban) { %>value="<%= account.iban %>"<% } else { %>placeholder="<%= __('IBAN') %>"<% } %> name="iban_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= __('Bank name') %></label>
+								<div class="col-md-8"><input <% if(account.bankName) { %>value="<%= account.bankName %>"<% } else { %>placeholder="<%= __('Bank name') %>"<% } %> name="bankName_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= __('Branch name') %></label>
+								<div class="col-md-8"><input <% if(account.branchName) { %>value="<%= account.branchName %>"<% } else { %>placeholder="<%= __('Branch name') %>"<% } %> name="branchName_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= __('Bank address') %></label>
+								<div class="col-md-8"><input <% if(account.bankAddress) { %>value="<%= account.bankAddress %>"<% } else { %>placeholder="<%= __('Bank address') %>"<% } %> name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+							</div>
+						</div>
+					</div>
+			<%	}
+			}
+		} %>
+			</div>
+		</div>
+		<!-- Button to add new bank account as per requested by user-->
+		<div class="form-group">
+			<div class="col-md-12 control-label">
+				<input type="hidden" value="<%= initialNbOfAccounts %>" name="nbOfAccounts">
+				<input type="hidden" name="indexOfAccounts" data-accounts-index="<%= indexOfAccounts %>">
+				<%
+					var addBankAccountData = '{ "userId": "' + user.id + '", "label": { "maxReached" : "' + __('Max number of accounts reached') + '" , "label" : "' + __('Label') + '" , "account" : "' + __('Account') + '" , "IBAN" : "' + __('IBAN') + '" , "bankName": "' + __('Bank name') + '" , "branchName": "' + __('Branch name') + '" , "bankAddress": "' + __('Bank address') + '" } }';
+				%>
+				<button type="button" class="btn btn-success" id="addBankAccountInput" data-subject="<%= addBankAccountData %>">
+					<span class="glyphicon glyphicon-plus"></span> <%= __('Add an account') %>
+				</button>
+			</div>
+		</div>
+	<% } %>
+
+	<!-- Submit -->
+	<div class="form-group">
+		<div class="col-md-12">
+			<%
+			var editSectionFormValue = 'basic';
+			if		(session.editUserSection === 'basic') 		 { editSectionFormValue = 'idCard';		  }
+			else if (session.editUserSection === 'idCard') 		 { editSectionFormValue = 'personalInfo'; }
+			else if (session.editUserSection === 'personalInfo') { editSectionFormValue = 'end';		  }	
+			%>
+			<input type="hidden" value="<%= editSectionFormValue %>" name="editUserSection">
+			<input type="submit" value="<%= __('Save and continue') %>" class="btn btn-lg btn-primary btn-block"/>
+			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+		</div>
+	</div>
 </form>

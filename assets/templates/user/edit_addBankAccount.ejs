@@ -1,0 +1,50 @@
+<div class="form-group bg-info custom-round-border">
+	<div class="col-md-12">
+		<div class="form-group">
+			<div class="col-md-12 control-label">
+					<button type="button" class="btn btn-danger btn-xs removeBankAccountclass" id="account_<%= count %>">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="label_<%= count %>" class="col-md-4 control-label"><%= label.label %></label>
+			<div class="col-md-8"><input placeholder="<%= label.label %>" name="label_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="iban_<%= count %>" class="col-md-4 control-label"><%= label.IBAN %></label>
+			<div class="col-md-8"><input placeholder="<%= label.IBAN %>" name="iban_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="bankName_<%= count %>" class="col-md-4 control-label"><%= label.bankName %></label>
+			<div class="col-md-8"><input placeholder="<%= label.bankName %>" name="bankName_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="branchName_<%= count %>" class="col-md-4 control-label"><%= label.branchName %></label>
+			<div class="col-md-8"><input placeholder="<%= label.branchName %>" name="branchName_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="bankAddress_<%= count %>" class="col-md-4 control-label"><%= label.bankAddress %></label>
+			<div class="col-md-8"><input placeholder="<%= label.bankAddress %>" name="bankAddress_<%= count %>" type="text" class="form-control"/></div>
+		</div>
+	</div>
+</div>
+<!-- Add validation rules for new user account input fields -->
+<script type="text/javascript">
+	$('input[name="label_<%= count %>"]').rules('add', {
+	        required: true
+	});
+	$('input[name="iban_<%= count %>"]').rules('add', {
+	        required: true,
+	        iban: true
+	});
+	$('input[name="bankName_<%= count %>"]').rules('add', {
+	        required: true
+	});
+	$('input[name="branchName_<%= count %>"]').rules('add', {
+	        required: true
+	});
+	$('input[name="bankAddress_<%= count %>"]').rules('add', {
+	        required: true
+	});
+</script>

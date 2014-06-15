@@ -1,0 +1,209 @@
+/**********
+* COLORS
+**********/
+@white: #FFFFFF;
+@green: #9EC03b;
+@orange: #F48744;
+@blue: #189ECA;
+@gray: #777574;
+@lightGray: #ececec;
+@black: #1C1C1C;
+@darkBlue: #106E8D;
+@darkGray: #4A4A4A; // paragraphs
+@red: #D16565; // error
+@lightpurple: #827cac;
+@mediumpurple: #5d5586;
+@darkpurple: #341040;
+
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.custom-navbar-logo
+{
+  height: 20px;
+  width: auto;
+}
+
+.navbar {
+	background-color: @darkpurple;
+	/* height: 60px; */
+}
+
+.jumbotron {
+	text-align: center;
+	background-color: @lightGray;
+}
+
+.jumbotron h2 {
+	font-size: 1.5em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	text-align: center;
+	font-weight: normal;
+	color: gray;
+}
+
+.container .gray {
+	color: gray;
+}
+
+.container {
+	.footer {
+		width: 25%;
+	}
+}
+
+/* 
+  used for:
+  	round border div
+  used in:
+	/user/show.ejs 
+*/
+.custom-round-border {
+	border: 1px solid @blue;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 10px 40px 10px;
+}
+
+/* Carousel
+-------------------------------------------------- */
+
+.carousel-caption {
+  background-color: transparent;
+  text-align:center;
+  /* margin-bottom: 120px; */
+  margin: 0 auto; 
+  height: 380px;
+} 
+
+.carousel-caption .btn {
+  margin-top: 10px;
+}
+
+.carousel-caption h1 {
+  font-size: 250%;
+}
+
+.carousel-caption p {
+  font-size: 140%;
+}
+
+/* Responsive UI */
+
+@media (min-width: 980px) {
+    #carousel-homepage.carousel img {
+    	width: 100%;
+    	height: 550px;
+	}
+}
+
+@media (max-width: 979px) {
+    #carousel-homepage.carousel img {
+    	width: 100%;
+    	height: 550px;
+	}
+}
+
+@media (max-width: 470px) {
+	#carousel-homepage.carousel img {
+		max-width:300%;
+		width:150%;
+		min-height: 550px;
+	}
+
+	.carousel-caption {
+	  height: 450px;
+	} 
+}
+/* -------------------------------------------------- */
+
+/* 
+  used for:
+  	div parent of custom-round-border
+  used in:
+	/user/show.ejs 
+  
+*/
+.custom-div-parent-round-border {
+	padding: 10px 40px 10px;
+}
+
+
+.form-signin,
+.form-user-edit {
+	max-width: 30%;
+	padding: 19px 29px 29px;
+	margin: 0 auto 20px;
+	margin-top: 20px;
+	background-color: @lightGray;
+	border: 1px solid @darkBlue;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+
+	h2{
+		text-align: center;
+		margin-top: 0px;
+	}
+}
+
+/*
+.form-signin input[type=text],
+.form-signin input[type=password] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}*/
+
+.form-signin input[type=text],
+.form-signin input[type=password],
+.form-user-edit input[type=text] {
+	margin-bottom: 0px;
+	padding: 0px 9px;
+}
+
+/* Used for User profile page (/user/show) */
+.show-user-labels {
+	text-align: right;
+	padding: 0px 9px;
+}
+
+.show-user-values {
+	text-align: left;
+	padding: 0px 9px;
+}
+
+.show-user-sections {
+	text-align: left;
+	padding: 10px 0px;
+	padding-top: 0px;
+}
+
+// Mixin
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Usage
+.container {
+  .clearfix();
+  .center-block();
+}
