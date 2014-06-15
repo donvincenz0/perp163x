@@ -95,6 +95,7 @@
     <script src="/js/dependencies/loadSecond/underscore.js"></script>
     <script src="/js/dependencies/loadThird/angular.js"></script>
     <script src="/js/dependencies/loadThird/bootstrap.js"></script>
+    <script src="/js/dependencies/loadThird/holder.js"></script>
     <script src="/js/dependencies/loadThird/jquery.validate.additional-methods.js"></script>
     <script src="/js/dependencies/loadThird/jquery.validate.datefix.js"></script>
     <script src="/js/app.js"></script>
@@ -123,8 +124,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><%= __("PERP 163x") %></a>
+          <a class="navbar-brand" href="/" title="PERP163.fr"><img src="/images/logoDualconseils.png" class="custom-navbar-logo"> PERP163.fr</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -137,36 +139,47 @@
           </ul>
           <div class="navbar-right">
             <% if (!session.authenticated) { %>
-              <form class="navbar-form navbar-left navbar-form-signin-validate" action="/session/create">
+                <form class="navbar-form navbar-right navbar-form-signin-validate" action="/session/create">
                 <div class="form-group">
                   <label class="control-label sr-only" for="email"><%= __('Email') %></label>
-                  <input type="text" placeholder="Email" name="email" class="form-control">
+                  <input type="text" placeholder="Email" name="email" class="form-control input-sm">
                 </div>
                 <div class="form-group">
                   <label class="control-label sr-only" for="password"><%= __('Password') %></label>
-                  <input type="password" placeholder="Mot de Passe" name="password" class="form-control">
+                  <input type="password" placeholder="Mot de Passe" name="password" class="form-control input-sm">
                 </div>
-                <button type="submit" class="btn btn-success"><%= __("Sign in") %></button>         
+                <button type="submit" class="btn btn-sm btn-success"><%= __("Sign in") %></button>         
                 <input type="hidden" name="_csrf" value="<% _csrf %>" />
               </form>
+              <!-- Create an account replaced by the homepage subscribed button
+                    2014/06/15
+              -->
+              <!--
               <form class="navbar-form navbar-left" action="/user/new"> 
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary"><%= __("Sign up") %>
                   <input type="hidden" name="_csrf" value="<% _csrf %>" />
                 </div>
               </form>
+              -->
+
+              <!-- Langage selection de-activated for this site since at the moment it'll always been in French 
+                        2014/06/15
+              -->
+              <!--
               <form id="formLang" class="navbar-form navbar-right" method="POST">
                 <div class="form-group">
                   <label class="control-label sr-only" for="lang"><%= __('Language') %></label>
                   <select name="lang" id="lang" class="form-control"> 
                     <option value="en" <% if (session.lang === "en") { %> selected <% } %> >English</option> 
                     <option value="fr" <% if (session.lang === "fr") { %> selected <% } %> >French</option> 
-                  </select>
+                  </select>             
                 </div>
                 <input type="hidden" name="_csrf" value="<%= _csrf %>" />
               </form>
+              -->
             <% } else { %>
-              <ul class="nav navbar-nav navbar-left">
+              <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <% if (session.User.firstname || session.User.lastname) { %>
@@ -177,8 +190,7 @@
                     <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     
-                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Show') + ' ' + __('profile') %></a></li>
-                    
+                    <li><a href="/user/show/<%= session.User.id %>"><%= __('Show') + ' ' + __('profile') %></a></li> 
                     <li><a href="/user/show/<%= session.User.id %>"><%= __('Beneficiaries / fund transfers') %></a></li>
                     <li><a href="/user/show/<%= session.User.id %>"><%= __('Portfolio management') %></a></li>
                     <li><a href="/user/show/<%= session.User.id %>"><%= __('Arbitrage options') %></a></li>
@@ -214,7 +226,7 @@
       <hr>
       <footer class="footer pull-right">
         <div>
-          <div><%= __("footer") %> <a href="http://www.dualconseils.com" target="_blank">Dualconseils</a></div>
+          <div>Perp via <a href="http://www.dualconseils.com" target="_blank">Dualconseils</a></div>
         </div>
       </footer>
     </div>

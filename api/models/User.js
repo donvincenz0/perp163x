@@ -10,7 +10,7 @@ var dateFormat = require('dateformat');
 module.exports = {
   
   schema: true,
-  
+
   attributes: {
 
   	title: {
@@ -163,7 +163,7 @@ module.exports = {
 
 	defaultLanguage: {
 		type: 'string',
-		defaultsTo: 'en'
+		defaultsTo: 'fr'
 	},
 
 	bankAccount: {

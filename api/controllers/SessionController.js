@@ -129,7 +129,7 @@ module.exports = {
 			// req.session.lang = saveLangBeforeSessionIsDestroyed;
 
 			// Redirect the browser to the sign-in screen
-			res.redirect('/session/new');	
+			res.redirect('/');	
 		});
 	},
   
