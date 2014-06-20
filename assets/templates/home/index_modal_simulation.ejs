@@ -1,0 +1,77 @@
+<div class="modal fade" id="<%= modalID %>" tabindex="-1" role="dialog" aria-labelledby="<%= modalLabel %>" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="<%= modalLabel %>"><img src="/images/<%= modalImage %>.jpg" width="15%"> Simulation du PERP163.fr</h4>
+    <h3>Si vous avez <%= modalTitle %></h3>
+  </div>
+  <div class="modal-body">
+  		<div class="row">
+  			<div class="col-md-12">
+				<h4>Suppositions :</h4>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<ul>
+							<li>Pour le calcul, votre départ à la retraite est fixé à 67 ans</li>
+							<li>Votre taux imposition est de 41%</li>
+							<li>Votre taux ISF est de 0,70%</li>
+							<li>Votre versement mensuel est de 200 euro</li>
+						</ul>
+					</li>
+					<li class="list-group-item"><b>A.</b> Vous aurez donc versé au total <%= intialSavings %> euro</li>
+					<li class="list-group-item"><b>B.</b> Votre économie d’impôt de <%= totalTaxRebate %> euro</li>
+					<li class="list-group-item"><b>C.</b> Votre réduction d’ISF <%= ISFreduction %> euro</li>
+					<li class="list-group-item list-group-item-success"><h5>Votre économie d’impôt finance votre retraite, vous avez donc épargné <%= totalSavings %> euro net (A-B).</h5></li>
+				</ul>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<h4>À votre départ en retraite:</h4>
+			</div>
+			<div class="col-md-6 text-right">
+				<button type="button" class="btn btn-note customPopover" data-toggle="popover" data-trigger="hover focus" data-html="true" data-placement="left" title="
+					<ul class='list-group'>
+						<li class='list-group-item'>Plus votre TMI sera fort, plus votre réduction d’impôt sera grande</li>
+						<li class='list-group-item'>Les fonds placés sur le PERP 163x sont hors ISF, cela augmente d’autant votre réduction d’impôt</li>
+						<li class='list-group-item'>Sans la récupération de 20% du capital,  la rente viagère serait plus élevée (simulation sur demande)</li>
+						<li class='list-group-item'>Sans les d’annuités garanties, votre rente viagère serait plus élevée (simulation sur demande)</li>
+					</ul>">À noter
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item"><b>A.</b> Vous récupérez 20% du capital soit <%= capitalGain %> euro</li>
+					<li class="list-group-item"><b>B.</b> Votre rente à vie est de <%= lifeAnnualIncome %> euro /an</li>
+					<li class="list-group-item"><b>C.</b> En cas de décès, vos bénéficiaires continueront de recevoir les rentes grâce à 25 ans <u>d’annuités garanties</u>, soit au minimum <%= guaranteedTotalIncome %> euro </li>
+					<li class="list-group-item list-group-item-success"><h5>À minima, votre retour sur investissement est donc <%= minimumReturnOnInvestment %> euro (A+C)</h5></li>
+				</ul>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-12 text-center">
+					<a href="#" data-toggle="modal" data-dismiss="modal" data-target="#modalAskForSimulation" class="btn btn-info">Demandez une simulation personalisée</a>
+					<a href="#" data-toggle="modal" data-dismiss="modal" data-target="#modalSubscription" class="btn btn-success">Souscrire en ligne</a>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="row">
+			<div class="col-md-6 text-left">
+				<button type="button" class="btn btn-default customPopover" data-toggle="popover" data-trigger="hover focus" data-html="true" data-placement="top" title="
+				Simulations non contractuelles, réalisées à titre d'information en fonction de la législation / fiscalité en vigueur au 1er janvier 2014, et se basant sur des données fictives.
+				<br /><br />
+				Nous insistons pour vous encourager à nous contacter afin de réaliser une étude en conformité avec vos contraintes et vos besoins.">Avertissement légal
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+  </div>
+</div>

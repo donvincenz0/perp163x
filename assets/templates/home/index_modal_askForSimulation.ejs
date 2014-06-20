@@ -1,0 +1,108 @@
+
+<div class="modal fade" id="modalAskForSimulation" tabindex="-1" role="dialog" aria-labelledby="modalAskForSimulationLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title" id="modalAskForSimulationLabel"><img src="/images/logoDualconseils.png" width="15%"> Demande d'une simulation personalisée</h4>
+</div>
+<div class="modal-body">
+
+		Envoyez nous les informations ci dessous afin que nous puissions vous envoyer votre simulation dans les plus brefs délais.
+		<br /><br />
+		Votre compte <b>Perp163.fr</b> sera créé afin que vous puissier vous connecter sur le site ultérieurement (vos données sont enregistrés).
+
+		<form action="/user/create" method="POST" class="form-horizontal form-askForSimulation form-validate-simulation">
+		<div class="form-group">
+			<div class="col-md-12 text-right">
+				<button type="button" class="btn btn-note2 customPopover" data-toggle="popover" data-trigger="hover focus" data-html="true" data-placement="left" title="
+					<ul class='list-group'>
+						<li class='list-group-item'>Toutes les informations demandées sont confidientielles et ne seront communiquées sans votre permission.</li>
+						<li class='list-group-item'>Seuls les champs indiqués avec * sont obligatoires cependant plus d'information nous aidera à vous fournir une simulation plus adaptée à votre profil</li>
+					</ul>">À noter
+				</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="email" class="col-md-5 control-label">Email *</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" placeholder="email" name="email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-md-5 control-label">Mot de passe *</label>
+			<div class="col-md-7">
+				<input type="password" class="form-control" placeholder="mot de passe" name="password" id="password"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="confirmation" class="col-md-5 control-label">Confirmation du mot de passe *</label>
+			<div class="col-md-7">
+				<input type="password" class="form-control" placeholder="confirmation du mot de passe" name="confirmation"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="birthDate" class="col-md-5 control-label">Date de naissance *</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" placeholder="date de naissance" name="birthDate" id="datepickerBirthday"/s>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="expectedRetirementAge" class="col-md-5 control-label">Âge prévisionnel de départ a la retraite</label>
+			<div class="col-md-7">
+				<input placeholder="67 ans par défaut" name="expectedRetirementAge" type="text" class="form-control"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="familyYearlyGrossIncomeRange" class="col-md-5 control-label">Tranche de revenus bruts annuels du foyer</label>
+			<div class="col-md-7">
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="below50">
+				   	inférieure à 50 000€
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="50to80">
+				   	de 50 000 à 80 000€
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="80to120">
+				   	de 80 000 à 120 000€
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="120to160">
+				   	de 120 000 à 160 000€
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="160to300">
+				   	de 160 000 à 300 000€
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="familyYearlyGrossIncomeRange" value="above300">
+				   	plus de 300 000€
+				  </label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12 text-right">
+				<input type="submit" class="btn btn-info" value="Envoyer la demande">
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</div>
+		</div>
+	</form>
+</div>
+ <div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+</div>
+

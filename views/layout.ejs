@@ -99,6 +99,7 @@
     <script src="/js/dependencies/loadThird/jquery.validate.additional-methods.js"></script>
     <script src="/js/dependencies/loadThird/jquery.validate.datefix.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/customBootstrap.js"></script>
     <script src="/js/customValidate.js"></script>
     <script src="/js/customjQueryUI.js"></script>
     <!--SCRIPTS END-->
@@ -197,6 +198,7 @@
                     <li><a href="/user/show/<%= session.User.id %>"><%= __('Payment details') %></a></li>                      
                     <li class="divider"></li>
                     <li><a href="/session/destroy"><button type="submit" class="btn btn-danger"><%= __("Sign out") %></button></a></li>
+                    <!-- Disabled langage selection 
                     <li class="divider"></li>
                     <li class="disabled"><a href="#"><%= __('Default language') %>:</a></li>
                     <li>
@@ -210,7 +212,8 @@
                         </div>
                         <input type="hidden" name="_csrf" value="<%= _csrf %>" />
                       </form>
-                  </li>
+                    </li>
+                  -->
                   </ul>
                 </li>
               </ul>

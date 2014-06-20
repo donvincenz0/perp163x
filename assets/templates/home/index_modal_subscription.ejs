@@ -1,0 +1,47 @@
+
+<div class="modal fade" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="modalSubscriptionLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title" id="modalSubscriptionLabel"><img src="/images/logoDualconseils.png" width="15%"> Souscription en ligne PERP163.fr</h4>
+</div>
+<div class="modal-body">
+
+		La première étape de la soucription en ligne au PERP 163 est la création de votre compte PERP163.fr.
+		<br /><br />
+		Si vous possédez déjà un compte, vous pouvez vous connecter directement en première page du site pour compléter votre souscription.
+
+		<form action="/user/create" method="POST" class="form-horizontal form-askForSimulation form-validate">
+		<div class="form-group text-left">
+			<h4>Création de votre compte</h4>
+		</div>
+		<div class="form-group">
+			<label for="email" class="col-md-5 control-label">Email *</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" placeholder="email" name="email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-md-5 control-label">Mot de passe *</label>
+			<div class="col-md-7">
+				<input type="password" class="form-control" placeholder="mot de passe" name="password" id="password"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="confirmation" class="col-md-5 control-label">Confirmation du mot de passe *</label>
+			<div class="col-md-7">
+				<input type="password" class="form-control" placeholder="confirmation du mot de passe" name="confirmation"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12 text-right">
+				<input type="submit" class="btn btn-info" value="Envoyer la demande">
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</div>
+		</div>
+	</form>
+</div>
+ <div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+</div>

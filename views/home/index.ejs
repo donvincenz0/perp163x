@@ -1,3 +1,6 @@
+<!-- Edit user bank account function used for views/user/edit.ejs -->
+<script src="/nolinker/js/home/index.js"></script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -12,22 +15,23 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
 			    <div class="item active"> 
-			      <img src="/images/money.jpg" alt="altmoney">
+			      <img src="/images/money.jpg" alt="Accessible à tous">
 			      <div class="carousel-caption">
 			      	<h1>Accessible à tous</h1>
 			        <p>Le PERP 163 permet de se constituer une épargne retraite dans un cadre fiscal exceptionnel</p>
 			       	<hr>
-			      	<a href="user/new" class="btn btn-info">Demandez une simulation personalisée</a>
-				    <a href="user/new" class="btn btn-success">Souscrire en ligne</a>
+			      	<a href="#" data-toggle="modal" data-target="#modalAskForSimulation" class="btn btn-info">Demandez une simulation personalisée</a>
+				    <a href="#" data-toggle="modal" data-target="#modalSubscription" class="btn btn-success">Souscrire en ligne</a>
 			      </div>
 			    </div>
 			   	<div class="item">
-			      <img src="/images/beach.jpg" alt="altbeach">
+			      <img src="/images/beach.jpg" alt="Quoi qu'il arrive, vous ne cotisez pas pour rien">
 			      <div class="carousel-caption">
 			      	<h1>Quoi qu'il arrive, vous ne cotisez pas pour rien !</h1>
+			      	<p>Avec les rentes à vie et 25 ans d'annuités garanties du PERP 163, vous pourrez prendre votre retraite en tout sérénité</p>
 			      	<hr>
-			      	<a href="user/new" class="btn btn-info">Demandez une simulation personalisée</a>
-				    <a href="user/new" class="btn btn-success">Souscrire en ligne</a>
+			      	<a href="#" data-toggle="modal" data-target="#modalAskForSimulation" class="btn btn-info">Demandez une simulation personalisée</a>
+				    <a href="#" data-toggle="modal" data-target="#modalSubscription" class="btn btn-success">Souscrire en ligne</a>
 			      </div>
 			    </div>
 			   	<div class="item">
@@ -36,8 +40,8 @@
 			      	<h1>Le PERP 163 est assuré par SWISS LIFE</h1>
 			      	<p>Assureur reconnu pour son expérience en matière de retraite et sa solidité</p>
 			      	<hr>
-			      	<a href="user/new" class="btn btn-info">Demandez une simulation personalisée</a>
-				    <a href="user/new" class="btn btn-success">Souscrire en ligne</a>
+			      	<a href="#" data-toggle="modal" data-target="#modalAskForSimulation" class="btn btn-info">Demandez une simulation personalisée</a>
+				    <a href="#" data-toggle="modal" data-target="#modalSubscription" class="btn btn-success">Souscrire en ligne</a>
 			      </div>
 			    </div>	    
 			  </div>
@@ -50,13 +54,13 @@
 			    <span class="glyphicon glyphicon-chevron-right"></span>
 			  </a>
 			</div>
-	<hr>
+			<hr>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
 	    	<div class="thumbnail">
-	      		<img src="/images/30yo.jpg" alt="30yo_3">   	
+	      		<a href="#" data-toggle="modal" data-target="#modal30yo"><img src="/images/30yo.jpg" alt="Si vous avez 30 ans"></a>	
 				<div class="caption">
 					<h3>Si vous avez 30 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal30yo">Voir la simulation</button></p>
@@ -65,7 +69,7 @@
     	</div>
 		<div class="col-md-4">
 	    	<div class="thumbnail">
-	      		<img src="/images/40yo.jpg" alt="30yo_3">   	
+	      		<a href="#" data-toggle="modal" data-target="#modal40yo"><img src="/images/40yo.jpg" alt="Si vous avez 40 ans"></a>	
 				<div class="caption">
 					<h3>Si vous avez 40 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal40yo">Voir la simulation</button></p>
@@ -74,7 +78,7 @@
     	</div>
 		<div class="col-md-4">
 	    	<div class="thumbnail">
-	      		<img src="/images/50yo.jpg" alt="30yo_3">   	
+	      		<a href="#" data-toggle="modal" data-target="#modal50yo"><img src="/images/50yo.jpg" alt="Si vous avez 50ans"></a>
 				<div class="caption">
 					<h3>Si vous avez 50 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal50yo">Voir la simulation</button></p>
@@ -82,128 +86,18 @@
 	    	</div>
     	</div>
     </div>
+   	<!-- Modal for PERP simulations, DIV to load templates via nolinker/js/home/index.js -->
+	<div id="customModals"></div>
 
-    <!-- Modal for simulations -->
-	<div class="modal fade" id="modal30yo" tabindex="-1" role="dialog" aria-labelledby="modal30yoLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="modal30yoLabel"><img src="/images/30yo.jpg" width="15%"> Simulation du PERP163.fr si vous avez 30 ans</h4>
-	      </div>
-	      <div class="modal-body">
-				<h4>Suppositions :</h4>
-				<ul class="list-group">
-					<li class="list-group-item">
-						<ul>
-							<li>Pour le calcul, votre départ à la retraite est fixé à 67 ans</li>
-							<li>Votre taux imposition est de 41%</li>
-							<li>Votre taux ISF est de 0,70%</li>
-							<li>Votre versement mensuel est de 200 euro</li>
-						</ul>
-					</li>
-					<li class="list-group-item">A) Vous aurez donc versé au total 91’200 euro</li>
-					<li class="list-group-item">B) Votre économie d’impôt de 37’392 euro</li>
-					<li class="list-group-item">C) Votre réduction d’ISF 23 388 euro</li>
-					<li class="list-group-item list-group-item-success"><h5>Votre économie d’impôt finance votre retraite, vous avez donc épargné 53’808 euro net (A-B).</h5></li>
-				</ul>
-				<h4>À votre départ en retraite:</h4>
-				<ul class="list-group">
-					<li class="list-group-item">A) Vous récupérez 20% du capital soit 49’374 euro</li>
-					<li class="list-group-item">B) Votre rente à vie est de 6’213 euro /an</li>
-					<li class="list-group-item">C) En cas de décès, vos bénéficiaires continueront de recevoir les rentes grâce à 25 ans <u>d’annuités garanties</u>, soit au minimum 155'320 euro </li>
-					<li class="list-group-item list-group-item-success"><h5>A minima, votre retour sur investissement est donc 204’694 euro (A+C)</h5></li>
-				</ul>
-				<div class="text-center">
-					<a href="mailto:william@dualconseils.com" type="button" class="btn btn-info">Demandez une simulation personalisée</a>
-					<a href="user/new" class="btn btn-success">Souscrire en ligne</a>
-				</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="modal fade" id="modal40yo" tabindex="-1" role="dialog" aria-labelledby="modal40yoLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="modal30yoLabel"><img src="/images/40yo.jpg" width="15%"> Simulation du PERP163.fr si vous avez 40 ans</h4>
-	      </div>
-	      <div class="modal-body">
-	      		<h4>Suppositions :</h4>
-				<ul class="list-group">
-					<li class="list-group-item">
-						<ul>
-							<li>Pour le calcul, votre départ à la retraite est fixé à 67 ans</li>
-							<li>Votre taux imposition est de 41%</li>
-							<li>Votre taux ISF est de 0,70%</li>
-							<li>Votre versement mensuel est de 200 euro</li>
-						</ul>
-					</li>
-					<li class="list-group-item">A) Vous aurez donc versé au total 67’200 euro</li>
-					<li class="list-group-item">B) Votre économie d’impôt de 27’552 euro</li>
-					<li class="list-group-item">C) Votre réduction d’ISF 10'308 euro</li>
-					<li class="list-group-item list-group-item-success">Votre économie d’impôt finance votre retraite, vous avez donc épargné 39'648 euro net (A-B).</li>
-				</ul>
-				<h4>À votre départ en retraite:</h4>
-				<ul class="list-group">
-					<li class="list-group-item">A) Vous récupérez 20% du capital soit 26’772 euro</li>
-					<li class="list-group-item">B) Votre rente à vie est de 3’535 euro /an avec 23 ans d’annuités garanties, soit au minimum 81’297 euro</li>
-					<li class="list-group-item list-group-item-success">A minima, votre retour sur investissement est donc 108’069 euro (A+B)</li>
-				</ul>
-				<div class="text-center">
-					<a href="mailto:william@dualconseils.com" type="button" class="btn btn-info">Demandez une simulation personalisée</a>
-					<a href="user/new" class="btn btn-success">Souscrire en ligne</a>
-				</div>		
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="modal fade" id="modal50yo" tabindex="-1" role="dialog" aria-labelledby="modal50yoLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="modal30yoLabel"><img src="/images/50yo.jpg" width="15%"> Simulation du PERP163.fr si vous avez 50 ans</h4>
-	      </div>
-	      <div class="modal-body">
-				<h4>Suppositions :</h4>
-				<ul class="list-group">
-					<li class="list-group-item">
-						<ul>
-							<li>Pour le calcul, votre départ à la retraite est fixé à 67 ans</li>
-							<li>Votre taux imposition est de 41%</li>
-							<li>Votre taux ISF est de 0,70%</li>
-							<li>Votre versement mensuel est de 200 euro</li>
-						</ul>
-					</li>
-					<li class="list-group-item">Vous aurez donc versé au total 43’200 euro</li>
-					<li class="list-group-item">Votre économie d’impôt de 17’712 euro</li>
-					<li class="list-group-item">Votre réduction d’ISF 3'518 euro</li>
-					<li class="list-group-item list-group-item-success">Votre économie d’impôt finance votre retraite, vous avez donc épargné 25’488 euro net (A-B).
-				</ul>
-				<h4>À votre départ en retraite:</h4>
-				<ul class="list-group">
-					<li class="list-group-item">A) Vous récupérez 20% du capital soit 12’896 euro</li>
-					<li class="list-group-item">B) Votre rente à vie est de 1’779 euro /an avec 22 ans d’annuités garanties, soit au minimum 39’140 euro</li>
-					<li class="list-group-item list-group-item-success">A minima, votre retour sur investissement est donc 52’036 euro (A+B)</li>
-				</ul>
-				<div class="text-center">
-					<a href="mailto:william@dualconseils.com" type="button" class="btn btn-info">Demandez une simulation personalisée</a>
-					<a href="user/new" class="btn btn-success">Souscrire en ligne</a>
-				</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
+	<script src="/js/customValidate.js"></script>
+	<script src="/js/customjQueryUI.js"></script>
+	<!-- 
+		Activate popover in the modal
+		- does not work in the inital js loaded in layout.ejs since the modal is added dynamically with the template after the page is loaded
+	-->
+	<script type="text/javascript">
+		$(function () {
+	    	$(".customPopover").popover();
+		});
+	</script>
 </div>

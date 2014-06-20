@@ -7,9 +7,10 @@
 @blue: #189ECA;
 @gray: #777574;
 @lightGray: #ececec;
+@mediumGray: #d1d1d1;
+@darkGray: #4A4A4A; // paragraphs
 @black: #1C1C1C;
 @darkBlue: #106E8D;
-@darkGray: #4A4A4A; // paragraphs
 @red: #D16565; // error
 @lightPurple: #827cac;
 @mediumPurple: #5d5586;
@@ -74,6 +75,39 @@ body {
 	text-align: justify;
 	font-weight: normal;
 	color: gray;
+}
+
+.customTooltip + .tooltip > .tooltip-inner {
+	background-color: @darkPurple;
+}
+.tooltip_footer_notes {
+	padding: 5px;
+}
+
+.btn-note {
+	background-color: @lightGray;
+	border-color: @lightGray;
+	color: #000000;
+
+}
+
+.btn-note:hover {
+	background-color: @mediumGray;
+	border-color: @mediumGray;
+	color: #000000;
+}
+
+.btn-note2 {
+	background-color: @mediumGray;
+	border-color: @mediumGray;
+	color: #000000;
+
+}
+
+.btn-note2:hover {
+	background-color: @lightGray;
+	border-color: @mediumGray;
+	color: #000000;
 }
 
 /* 
@@ -153,6 +187,22 @@ body {
 	padding: 10px 40px 10px;
 }
 
+.form-askForSimulation {
+	max-width: 80%;
+	padding: 10px 29px 0px;
+	margin: 0 auto 20px;
+	margin-top: 20px;
+	background-color: @lightGray;
+	border: 1px solid @lightPurple;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+
+	h2{
+		text-align: center;
+		margin-top: 0px;
+	}
+}
 
 .form-signin,
 .form-user-edit {
