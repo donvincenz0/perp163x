@@ -486,10 +486,6 @@ $(document).ready(function(){
 			"familyAssetsRange":""
 		},
 		submitHandler: function(form) {
-			if($('#expectedRetirementAge').val() === ''){
-				$('#expectedRetirementAge').val(67);
-				console.log('defaulted to 67');
-			}
 			form.submit();	
   		}
 	});

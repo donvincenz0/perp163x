@@ -12,12 +12,14 @@ module.exports = {
 
    create: function(req, res, next) {
 
-      // Default values for optional values
-      //if (!req.param['expectedRetirementAge']) {
-      //  req.param['expectedRetirementAge'] = 67;
-      //}
+      var arrayParams = req.params.all();
 
-   		User.create(req.params.all(), function userCreated (err, user) {
+      // Default values for optional values
+      if (arrayParams.expectedRetirementAge === '') {
+        arrayParams.expectedRetirementAge = 67;
+      }
+
+   		User.create(arrayParams, function userCreated (err, user) {
 
    			// // If there's an error
    			if (err) {
