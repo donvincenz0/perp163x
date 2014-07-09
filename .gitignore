@@ -23,7 +23,17 @@ pids
 logs
 results
 
-node_modules
+node_modules/bcrypt
+node_modules/connect-redis
+node_modules/dateformat
+node_modules/ejs
+node_modules/grunt*
+node_modules/holder
+node_modules/include-all
+node_modules/nodemailer
+node_modules/rc
+node_modules/sails*
+node_modules/underscore
 
 npm-debug.log
 
