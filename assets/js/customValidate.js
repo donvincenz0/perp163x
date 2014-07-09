@@ -8,7 +8,7 @@ $(document).ready(function(){
 		rules: {
 			email: {
 				required: true,
-				email: true
+				email: true,
 			},
 			password: {
 				minlength: 8,
@@ -56,7 +56,14 @@ $(document).ready(function(){
 		rules: {
 			email: {
 				required: true,
-				email: true
+				email: true,
+				remote: {
+					url: '/user/isavailable',
+					type : 'post',
+					data: {
+          				_csrf: window.donvincenzo.csrf
+          			}
+				}
 			},
 			password: {
 				minlength: 8,
@@ -328,7 +335,8 @@ $(document).ready(function(){
 		rules: {
 			email: {
 				required: true,
-				email: true
+				email: true,
+				remote: '/user/isavailable'
 			},
 			password: {
 				minlength: 8,
@@ -481,7 +489,10 @@ $(document).ready(function(){
 			"maritalStatus":"",
 			"socialRegime":"",
 			"familyYearlyGrossIncomeRange":"",
-			"familyAssetsRange":"",
-		}
+			"familyAssetsRange":""
+		},
+		submitHandler: function(form) {
+			form.submit();	
+  		}
 	});
 });

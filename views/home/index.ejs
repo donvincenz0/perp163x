@@ -38,7 +38,7 @@
 			      <img src="/images/showBusinessCard.jpg" alt="Le PERP 163 est assuré par SWISS LIFE">
 			      <div class="carousel-caption">
 			      	<h1>Le PERP 163 est assuré par SWISS LIFE</h1>
-			      	<p>Assureur reconnu pour son expérience en matière de retraite et sa solidité</p>
+			      	<p>Assureur reconnu pour sa solidité et son expérience en matière de retraite</p>
 			      	<hr>
 			      	<a href="#" data-toggle="modal" data-target="#modalAskForSimulation" class="btn btn-info">Demandez une simulation personalisée</a>
 				    <a href="#" data-toggle="modal" data-target="#modalSubscription" class="btn btn-success">Souscrire en ligne</a>
@@ -62,7 +62,7 @@
 	    	<div class="thumbnail">
 	      		<a href="#" data-toggle="modal" data-target="#modal30yo"><img src="/images/30yo.jpg" alt="Si vous avez 30 ans"></a>	
 				<div class="caption">
-					<h3>Si vous avez 30 ans</h3>
+					<h3>Vous avez 30 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal30yo">Voir la simulation</button></p>
 				</div>
 	    	</div>
@@ -71,7 +71,7 @@
 	    	<div class="thumbnail">
 	      		<a href="#" data-toggle="modal" data-target="#modal40yo"><img src="/images/40yo.jpg" alt="Si vous avez 40 ans"></a>	
 				<div class="caption">
-					<h3>Si vous avez 40 ans</h3>
+					<h3>Vous avez 40 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal40yo">Voir la simulation</button></p>
 				</div>
 	    	</div>
@@ -80,12 +80,13 @@
 	    	<div class="thumbnail">
 	      		<a href="#" data-toggle="modal" data-target="#modal50yo"><img src="/images/50yo.jpg" alt="Si vous avez 50ans"></a>
 				<div class="caption">
-					<h3>Si vous avez 50 ans</h3>
+					<h3>Vous avez 50 ans</h3>
 					<p class="text-right"><button class="btn btn-info" data-toggle="modal" data-target="#modal50yo">Voir la simulation</button></p>
 				</div>
 	    	</div>
     	</div>
     </div>
+
    	<!-- Modal for PERP simulations, DIV to load templates via nolinker/js/home/index.js -->
 	<div id="customModals"></div>
 
@@ -100,4 +101,19 @@
 	    	$(".customPopover").popover();
 		});
 	</script>
+
+	<!-- In case the action that loaded the page was a simulation request, show the thanksForSimulation modal-->
+	<% 
+		if(session.lastAction === 'simulationRequestSent') {	
+	%>
+			<script type="text/javascript">
+			    $(function () {
+					$('#modalThanksForSimulation').modal('show');
+				});
+			</script>	
+	<%		
+			// reinitialize lastAction session variable
+			session.lastAction = null;
+		} 
+	%>
 </div>

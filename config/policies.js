@@ -21,13 +21,14 @@ module.exports.policies = {
   '*': ["localize", "flash"],
 
   user: {
-  	'new'		: ["localize", "flash"],
-  	subscribe	: ["flash", "isAuthenticated"], // Careful, this is called several times per page request. For example, do not put "localize" here.
-  	create		: ["localize", "flash"],
-  	show		: ["localize", "userCanSeeProfile"],
-  	edit		: ["localize", "flash", "userCanSeeProfile"],
-  	update		: ["localize", "flash", "userCanSeeProfile"],
-  	'*'			: ["localize", "userCanSeeProfile"]
+  	'new'		     : ["localize", "flash"],
+  	subscribe	   : ["flash", "isAuthenticated"], // Careful, this is called several times per page request. For example, do not put "localize" here.
+  	create		   : ["localize", "flash"],
+  	show		     : ["localize", "userCanSeeProfile"],
+  	edit		     : ["localize", "flash", "userCanSeeProfile"],
+  	update       : ["localize", "flash", "userCanSeeProfile"],
+    isAvailable  : ["localize"],
+  	'*'		       : ["localize", "userCanSeeProfile"]
   },
 
 	// Here's an example of mapping some policies to run before

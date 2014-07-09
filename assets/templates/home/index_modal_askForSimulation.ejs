@@ -4,21 +4,21 @@
 <div class="modal-content">
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title" id="modalAskForSimulationLabel"><img src="/images/logoDualconseils.png" width="15%"> Demande d'une simulation personalisée</h4>
+	<h4 class="modal-title" id="modalAskForSimulationLabel"><img src="/images/logoDualconseils.png" width="15%"> Demande d'une simulation personalisée PERP163.fr</h4>
 </div>
 <div class="modal-body">
 
 		Envoyez nous les informations ci dessous afin que nous puissions vous envoyer votre simulation dans les plus brefs délais.
 		<br /><br />
-		Votre compte <b>Perp163.fr</b> sera créé afin que vous puissier vous connecter sur le site ultérieurement (vos données sont enregistrés).
+		Votre compte <b>PERP163.fr</b> sera créé afin que vous puissier vous connecter sur le site ultérieurement si vous décidez de souscrire en ligne.
 
-		<form action="/user/create" method="POST" class="form-horizontal form-askForSimulation form-validate-simulation">
+		<form action="/user/create" method="POST" class="form-horizontal form-askForSimulation form-validate-simulation" id="simulationForm">
 		<div class="form-group">
 			<div class="col-md-12 text-right">
 				<button type="button" class="btn btn-note2 customPopover" data-toggle="popover" data-trigger="hover focus" data-html="true" data-placement="left" title="
 					<ul class='list-group'>
-						<li class='list-group-item'>Toutes les informations demandées sont confidientielles et ne seront communiquées sans votre permission.</li>
-						<li class='list-group-item'>Seuls les champs indiqués avec * sont obligatoires cependant plus d'information nous aidera à vous fournir une simulation plus adaptée à votre profil</li>
+						<li class='list-group-item'>Toutes les informations communiquées à PERP163.fr sont strictement réservées à notre usage.</li>
+						<li class='list-group-item'>Seuls les champs * sont obligatoires, plus d'information nous permet de vous fournir une meilleure simulation.</li>
 					</ul>">À noter
 				</button>
 			</div>
@@ -97,6 +97,7 @@
 		<div class="form-group">
 			<div class="col-md-12 text-right">
 				<input type="submit" class="btn btn-info" value="Envoyer la demande">
+				<input type="hidden" name="accountCreationOrigin" value="simulation" />
 				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 			</div>
 		</div>

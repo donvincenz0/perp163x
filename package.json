@@ -25,7 +25,9 @@
     "bcrypt": "^0.7.8",
     "sails-mongo": "~0.10.0-rc5",
     "connect-redis": "~1.4.7",
-    "dateformat": "~1.0.8-1.2.3"
+    "dateformat": "~1.0.8-1.2.3",
+    "nodemailer": "~0.7.0",
+    "underscore": "~1.6.0"
   },
   "scripts": {
     "start": "node app.js",

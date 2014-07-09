@@ -4,7 +4,6 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
 module.exports = {
     
    'new': function(req, res) {
@@ -13,9 +12,12 @@ module.exports = {
 
    create: function(req, res, next) {
 
-   		// create a User with the params sent from
-   		// the sign up form --> new.ejs
-   		User.create( req.params.all(), function userCreated (err, user) {
+      // Default values for optional values
+      //if (!req.param['expectedRetirementAge']) {
+      //  req.param['expectedRetirementAge'] = 67;
+      //}
+
+   		User.create(req.params.all(), function userCreated (err, user) {
 
    			// // If there's an error
    			if (err) {
@@ -42,9 +44,47 @@ module.exports = {
           // Let other subscribed sockets know that the user was created
           User.publishCreate(user);
 
-          // After successfully creating the user
-     			// redirect to the show action
-          res.redirect('/user/edit/' + user.id);
+          // In case of online simulation, send an email with all the info to the client and PERP163x sales staff
+          if (req.param('accountCreationOrigin') === 'simulation') {
+
+            // Mail to the client
+            options = {
+              to: {
+                email: req.param('email'),
+              },
+              subject: "PERP163.fr: Demande de simulation personalisée",
+              template: "client_simulation"
+            };
+
+            EmailService.send(options);
+
+            // Mail to PERP163 staff
+            options = {
+              to: {
+                email: 'vince.jaques@gmail.com',
+                // firstname: staff.firstname,
+                // lastname: staff.lastname
+              },
+              subject: "PERP163.fr: Demande de simulation d'un nouveau client",
+              template: "staff_simulation"
+            };
+
+            var data = {
+              email: req.param('email'),
+              birthDate: req.param('birthDate'),
+              expectedRetirementAge: req.param('expectedRetirementAge'),
+              familyYearlyGrossIncomeRange: req.param('familyYearlyGrossIncomeRange')
+            };
+
+            EmailService.send(options, data);
+
+            req.session.lastAction = 'simulationRequestSent';
+            res.redirect('/');          
+          }
+          // Else, it's a case of online subscription, redirect to the subscription form (starting by editing user info)
+          else { 
+            res.redirect('/user/edit/' + user.id);   
+          }
    		   });
       });
    },
@@ -200,9 +240,29 @@ module.exports = {
         // subscribe this socket to the user instance room
         User.subscribe(req.socket, users);
 
-        // This will avoid a warning from the socket for trying to render
-        // html over the socket
+        // This will avoid a warning from the socket for trying to render html over the socket
         res.send(200);
+      });
+  },
+
+  /**
+    Check if the user's email (unique id) is available for use
+    Sends 'true' to the view if available, 'false' if not, required for JQUERY form validate()
+  */
+  isAvailable: function (req, res) {
+      User.find(function foundUsers(err, users) {       
+        // Look if a user with the same email already exists
+        for(var userKey in users){
+          var user = users[userKey];
+          if(user.email === req.param('email')){
+            // User found so sending back it's not available to JQUERY validate
+            res.send('false');
+            return;
+          }
+        }
+
+        // User not found, so sending back that it's available to JQUERY validate
+        res.send('true');
       });
   }
 

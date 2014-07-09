@@ -13,6 +13,8 @@ $(document).ready(function() {
 
     $("#customModals").append(JST['assets/templates/home/index_modal_subscription.ejs'](obj));
 
+    $("#customModals").append(JST['assets/templates/home/index_modal_thanksForSimulation.ejs']);
+
     var obj = {
         modalID: "modal30yo",
         modalLabel: "modal30yoLabel",
@@ -62,5 +64,5 @@ $(document).ready(function() {
         minimumReturnOnInvestment: "52’036"
     };
 
-    $("#customModals").append(JST['assets/templates/home/index_modal_simulation.ejs'](obj));    
+    $("#customModals").append(JST['assets/templates/home/index_modal_simulation.ejs'](obj));
 });
