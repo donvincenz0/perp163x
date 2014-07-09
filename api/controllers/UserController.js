@@ -61,7 +61,7 @@ module.exports = {
             // Mail to PERP163 staff
             options = {
               to: {
-                email: 'vince.jaques@gmail.com',
+                email: 'PERP163@dualconseils.com',
                 // firstname: staff.firstname,
                 // lastname: staff.lastname
               },

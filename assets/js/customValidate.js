@@ -57,13 +57,7 @@ $(document).ready(function(){
 			email: {
 				required: true,
 				email: true,
-				remote: {
-					url: '/user/isavailable',
-					type : 'post',
-					data: {
-          				_csrf: window.donvincenzo.csrf
-          			}
-				}
+				remote: '/user/isavailable'
 			},
 			password: {
 				minlength: 8,
@@ -492,6 +486,10 @@ $(document).ready(function(){
 			"familyAssetsRange":""
 		},
 		submitHandler: function(form) {
+			if($('#expectedRetirementAge').val() === ''){
+				$('#expectedRetirementAge').val(67);
+				console.log('defaulted to 67');
+			}
 			form.submit();	
   		}
 	});
