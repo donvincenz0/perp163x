@@ -1,0 +1,14 @@
+Formulaire demande de simulation
+-	Mettre en champ falcutatif nom et prénom 
+-	Supprimer la confirmation du mot de pass, et on s’en fout du nombre de caractère, donc laisse libre (on manipule pas de cash)
+-	Date de naissance format à l’européenne soit 30/09/56 ou 1956
+-	Tu as mis un circonflex sur le A de age ?  à enlever 
+-	Simplifier la phrase en enlevant prévisionnel, cela coule de source 
+-	 francaise 
+-	remplacé par < Revenu net Imposable annuel > (même annuel pourrait être enlevé mais bon)
+et les montants sont :
+ inférieure à 30 000€ 
+de 30 000 à 67 000€ 
+de 68 000 à 179 000€ 
+et au delà de 180 000
+-	le bug d’envoi était un bug de cache 
